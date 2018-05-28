@@ -1,7 +1,7 @@
 /**
  * Provides all classes for the DAO.
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
  * @version 1.0
  */
 package model.dao;

@@ -9,7 +9,7 @@ import view.ViewFacade;
 /**
  * <h1>The Class Main.</h1>
  *
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
  * @version 1.0
  */
 public abstract class Main {
@@ -21,9 +21,7 @@ public abstract class Main {
      *            the arguments
      */
     public static void main(final String[] args) {
-    	System.out.println("TEST COMMIT CONTRIBUTOR");
-    	System.out.println("TEST COMMIT CONTRIBUTOR ENZO");
-    	System.out.println("TEST COMMIT CONTRIBUTOR CS");
+ 
         final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
 
         try {
