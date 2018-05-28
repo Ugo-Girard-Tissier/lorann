@@ -21,6 +21,7 @@ public abstract class Main {
      *            the arguments
      */
     public static void main(final String[] args) {
+    	System.out.println("TEST COMMIT CONTRIBUTOR");
         final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
 
         try {
