@@ -22,6 +22,7 @@ public abstract class Main {
      */
     public static void main(final String[] args) {
     	System.out.println("TEST COMMIT CONTRIBUTOR");
+    	System.out.println("TEST COMMIT CONTRIBUTOR ENZO");
         final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
 
         try {
