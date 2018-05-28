@@ -4,6 +4,9 @@ import java.sql.SQLException;
 
 import controller.ControllerFacade;
 import model.ModelFacade;
+import model.map;
+import model.obstacle;
+import showboard.BoardFrame;
 import view.ViewFacade;
 
 /**
@@ -25,8 +28,12 @@ public abstract class Main {
      */
     public static void main(final String[] args) {
  
+    	
+    	BoardFrame fr = new BoardFrame ("test", false);
+    	
+    	
         final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
-
+        
         try {
             controller.start();
         } catch (final SQLException exception) {

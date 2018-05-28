@@ -1,5 +1,6 @@
 package showboard;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,6 +16,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
+
+import model.map;
+
+
 
 /**
  * <h1>The Class BoardPanel.</h1>
@@ -79,16 +84,21 @@ class BoardPanel extends JPanel implements Observer {
     /** The height looped. */
     private Boolean             heightLooped     = false;
 
+    
+    map map;
+    
     /**
      * Instantiates a new board panel.
      */
-    BoardPanel() {
+    BoardPanel(map map_p) {
         super();
         this.pawns = new ArrayList<>();
         this.noImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         final Graphics2D graphics = this.noImage.createGraphics();
         graphics.setColor(Color.darkGray);
         graphics.fillRect(0, 0, 2, 2);
+        
+        this.map = map_p;
     }
 
     /**
@@ -102,16 +112,9 @@ class BoardPanel extends JPanel implements Observer {
      * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
      */
     @Override
-    public final void paintComponent(final Graphics graphics) {
+    public final void paintComponent(final Graphics g) {
 
-        final Map<String, ArrayList<IPawn>> mapPawn = this.createMapPawn();
-
-        for (int x = this.getCornerMinX(); x <= this.getCornerMaxX(); x++) {
-            for (int y = this.getCornerMinY(); y <= this.getCornerMaxY(); y++) {
-                this.drawSquareXY(graphics, x, y);
-                this.drawPawnsXY(graphics, mapPawn, x, y);
-            }
-        }
+    	g.drawImage(this.map.mapObstacle[0][0].img_ob, 12, 12, 32, 32, this);
     }
 
     /*
