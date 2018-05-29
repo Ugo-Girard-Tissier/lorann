@@ -3,6 +3,7 @@ package main;
 import java.sql.SQLException;
 
 import controller.ControllerFacade;
+import model.IModel;
 import model.ModelFacade;
 import model.map;
 import model.obstacle;
@@ -15,7 +16,8 @@ import view.ViewFacade;
  * @author Abdel, Arthur, Enzo, Sulyven and Ugo group
  * @version 1.0
  */
-public abstract class Main {
+public abstract class Main 
+{
 
 	//test git git
 	
@@ -26,17 +28,18 @@ public abstract class Main {
      * @param args
      *            the arguments
      */
-    public static void main(final String[] args) {
- 
-    	
-    	BoardFrame fr = new BoardFrame ("test", false);
-    	
-    	
-        final ControllerFacade controller = new ControllerFacade(new ViewFacade(), new ModelFacade());
+    public static void main(final String[] args) 
+    {
+    	final IModel model = new ModelFacade();
+    	final ViewFacade view = new ViewFacade(model.getMap());
+        final ControllerFacade controller = new ControllerFacade(view, model);
         
-        try {
+        try 
+        {
             controller.start();
-        } catch (final SQLException exception) {
+        } 
+        catch (final SQLException exception) 
+        {
             exception.printStackTrace();
         }
     }

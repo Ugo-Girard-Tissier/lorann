@@ -9,7 +9,9 @@ import java.util.List;
  * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
  * @version 1.0
  */
-public interface IModel {
-
+public interface IModel 
+{
+	public IMap getMap();
+	public void setMap(IMap map);
 
 }

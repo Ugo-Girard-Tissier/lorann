@@ -27,7 +27,6 @@ public class obstacle {
 			try {
 				this.img_ob = ImageIO.read(getClass().getResourceAsStream("/bone.png"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			};
 			break;
@@ -37,7 +36,6 @@ public class obstacle {
 			try {
 				this.img_ob = ImageIO.read(getClass().getResourceAsStream("/horizontal_bone.png"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			};
 			break;
@@ -48,7 +46,6 @@ public class obstacle {
 			try {
 				this.img_ob = ImageIO.read(getClass().getResourceAsStream("/vertical_bone.png"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			};
 			break;
