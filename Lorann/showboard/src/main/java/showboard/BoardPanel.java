@@ -116,7 +116,7 @@ class BoardPanel extends JPanel implements Observer {
         {
             for (int y = this.getCornerMinY(); y <= this.getCornerMaxY(); y++) 
             {
-                this.drawSquareXY(graphics, y, x);
+                this.drawSquareXY(graphics, x, y);
                 this.drawPawnsXY(graphics, mapPawn, x, y);
             }
         }
@@ -347,7 +347,8 @@ class BoardPanel extends JPanel implements Observer {
      * @param y
      *            the y
      */
-    private void drawSquareXY(final Graphics graphics, final int x, final int y) {
+    private void drawSquareXY(final Graphics graphics, final int x, final int y) 
+    {
         Image image;
         image = this.getImageXY(x, y, this.getWidthLimit(), this.getHeightLimit());
         graphics.drawImage(image, this.getSquareSizeWidth() * (x - this.getCornerMinX()),

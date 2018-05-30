@@ -11,7 +11,5 @@ import java.util.List;
  */
 public interface IModel 
 {
-	public IMap getMap();
-	public void setMap(IMap map);
 
 }

@@ -11,7 +11,7 @@ import java.util.Observable;
 
 import showboard.*;
 
-public class map extends Observable implements IMap
+public class map extends Observable  
 {
 	private ISquare square; 
 	private static int Hight = 12;

@@ -20,7 +20,7 @@ import model.*;
  * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
  * @version 1.0
  */
-public class ViewFacade implements IView, Runnable
+public class ViewFacade implements IView
 {
 	private static final int width = 20;
 	
@@ -28,9 +28,9 @@ public class ViewFacade implements IView, Runnable
 	
 	private static final int timeLoop = 300;
 	
-	private static final int sizeFrameWidth = 448;
+	private static final int sizeFrameWidth = 1280;
 	
-	private static final int sizeFrameHeight = 384;
+	private static final int sizeFrameHeight = 768;
 	
 	
 	private static final Rectangle lorannGame = new Rectangle(0 ,0 ,width ,height);
@@ -42,27 +42,23 @@ public class ViewFacade implements IView, Runnable
 	
 	private final obstacle V_Bone = new obstacle("/vertical_bone.png");
 	
-	
-	private IMap map;
-	
-	private int Hight_txt = 12;
-	private int Width_txt = 20;
+	private final obstacle Nothing = new obstacle("void.png");
 	
 	File f = new File("annex/MAP1.txt");
     FileReader fileReader;
     public char choice;
+    public char mapRead[][] = new char[20][12];
 
     /**
      * Instantiates a new view facade.
      */
-    public ViewFacade(IMap map) throws IOException
+    public ViewFacade() throws IOException
     {
         super();
         this.Bone.loadImage();
         this.H_Bone.loadImage();
         this.V_Bone.loadImage();
-        SwingUtilities.invokeLater(this);
-        this.setMap(map);
+        ReadMap();
     }
     public void run() 
     {
@@ -70,29 +66,14 @@ public class ViewFacade implements IView, Runnable
         boardFrame.setDimension(new Dimension(width, height));
         boardFrame.setDisplayFrame(lorannGame);
         boardFrame.setSize(sizeFrameWidth, sizeFrameHeight);
+        boardFrame.setLocationRelativeTo(null);
         
         //Frame Configure
         this.frameConfigure(boardFrame);
-        
-        /*this.getMap().getObservable().addObserver(boardFrame.getObserver());
-        boardFrame.setVisible(true);
-        for (int y = 0; y < map.getHight();y++) 
-		{
-			for (int x = 0; x < map.getWidth();x++) 
-			{
-				map.setSquare(x,y);
-				if (map.getSquare() == null)
-		        {
-		        	System.out.println("null");
-		        }
-				boardFrame.addSquare(map.getSquare(), x, y);
-			}
-		}
-        boardFrame.getDisplayFrame();*/
     }
-    public final void frameConfigure(final BoardFrame frame) 
+    public final void ReadMap()
     {
-		/*try
+    	try
         {
             fileReader = new FileReader(f);
         }
@@ -112,21 +93,20 @@ public class ViewFacade implements IView, Runnable
                 	choice = (char)c;
                 	switch (choice) 
                 	{
-            		
 	        		case 'B' :
-	        			frame.addSquare(this.Bone, x, y);
+	        			mapRead[x][y] = 'B';
 	        			break;
 	        			
 	        		case 'H' : 
-	        			frame.addSquare(this.H_Bone, x, y);
+	        			mapRead[x][y] = 'H';
 	        			break;
 	        			
 	        		case 'V' : 
-	        			frame.addSquare(this.V_Bone, x, y);
+	        			mapRead[x][y] = 'V';
 	        			break;
 	        		
 	        		case 'N' : 
-	        			
+	        			mapRead[x][y] = 'N';
 	        			break;
                 	}
                 }
@@ -135,29 +115,33 @@ public class ViewFacade implements IView, Runnable
         catch (IOException exception)
         {
             System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
-        }*/
+        }
+    }
+    public final void frameConfigure(final BoardFrame frame) 
+    {
+		
     	for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                if ((x == 0) || (x == (width - 1)) || (y == 0) || (y == (height - 1))){
-                    frame.addSquare(this.Bone, x, y);
-                } else if (((x + y) % 4) == 0) {
-                    frame.addSquare(this.H_Bone, x, y);
-                } else {
-                    frame.addSquare(this.V_Bone, x, y);
-                }
+            for (int x = 0; x < width; x++)
+            {
+            	switch(mapRead[x][y])
+            	{
+            		case 'B':
+            			frame.addSquare(Bone, x, y);
+            			break;
+            		case 'H':
+            			frame.addSquare(H_Bone, x, y);
+            			break;
+            		case 'V':
+            			frame.addSquare(V_Bone, x, y);
+            			break;
+            		case 'N':
+            			frame.addSquare(Nothing, x, y);
+        				break;
+            	}
             }
         }
         frame.setVisible(true);
     }
-	
-	public IMap getMap() 
-	{
-		return map;
-	}
-	public void setMap(IMap map) 
-	{
-		this.map = map;
-	}
 	
 
 }
