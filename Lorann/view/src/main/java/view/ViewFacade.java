@@ -41,10 +41,12 @@ public class ViewFacade implements IView
 	private final obstacle H_Bone = new obstacle("/horizontal_bone.png");
 	
 	private final obstacle V_Bone = new obstacle("/vertical_bone.png");
+
+	private final obstacle Nothing = new obstacle("/void.png");
 	
-	private final obstacle Nothing = new obstacle("void.png");
+	private final obstacle closeGate = new obstacle("/gate_closed.png");
 	
-	File f = new File("annex/MAP1.txt");
+	File f = new File("annex/MAP2.txt");
     FileReader fileReader;
     public char choice;
     public char mapRead[][] = new char[20][12];
@@ -58,6 +60,8 @@ public class ViewFacade implements IView
         this.Bone.loadImage();
         this.H_Bone.loadImage();
         this.V_Bone.loadImage();
+        this.Nothing.loadImage();
+        this.closeGate.loadImage();
         ReadMap();
     }
     public void run() 
@@ -108,6 +112,10 @@ public class ViewFacade implements IView
 	        		case 'N' : 
 	        			mapRead[x][y] = 'N';
 	        			break;
+	        			
+	        		case 'C' :
+	        			mapRead[x][y] = 'C';
+	        			break;
                 	}
                 }
             }
@@ -136,6 +144,9 @@ public class ViewFacade implements IView
             			break;
             		case 'N':
             			frame.addSquare(Nothing, x, y);
+        				break;
+            		case 'C':
+            			frame.addSquare(closeGate, x, y);
         				break;
             	}
             }
