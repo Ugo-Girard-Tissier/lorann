@@ -33,7 +33,7 @@ public abstract class Main
     public static void main(final String[] args) throws IOException 
     {
     	final IModel model = new ModelFacade();
-    	final ViewFacade view = new ViewFacade();
+    	final ViewFacade view = new ViewFacade(model);
         final ControllerFacade controller = new ControllerFacade(view, model);
         
         try 

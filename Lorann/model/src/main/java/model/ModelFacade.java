@@ -12,14 +12,21 @@ import java.util.List;
  */
 public final class ModelFacade implements IModel
 {
-    /**
+	private map Map;
+	
+	/**
      * Instantiates a new model facade.
      */
     public ModelFacade() 
     {
+    	this.Map = new map();
     }
-    
-
-
-
+    public map getMap() 
+    {
+		return Map;
+	}
+	public void setMap(map map)
+	{
+		Map = map;
+	}
 }

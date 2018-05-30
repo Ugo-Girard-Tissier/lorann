@@ -22,52 +22,33 @@ import model.*;
  */
 public class ViewFacade implements IView
 {
-	private static final int width = 20;
-	
-	private static final int height = 12;
-	
+
 	private static final int timeLoop = 300;
 	
 	private static final int sizeFrameWidth = 1280;
 	
 	private static final int sizeFrameHeight = 768;
 	
+	private static final Rectangle lorannGame = new Rectangle(0 ,0 ,map.getWidth(),map.getHeight());
 	
-	private static final Rectangle lorannGame = new Rectangle(0 ,0 ,width ,height);
-	
-	 //Obstacles
-	private final obstacle Bone = new obstacle("/bone.png");
-	
-	private final obstacle H_Bone = new obstacle("/horizontal_bone.png");
-	
-	private final obstacle V_Bone = new obstacle("/vertical_bone.png");
-
-	private final obstacle Nothing = new obstacle("/void.png");
-	
-	private final obstacle closeGate = new obstacle("/gate_closed.png");
-	
-	File f = new File("annex/MAP2.txt");
-    FileReader fileReader;
-    public char choice;
-    public char mapRead[][] = new char[20][12];
-
+	private IModel model;
     /**
      * Instantiates a new view facade.
      */
-    public ViewFacade() throws IOException
+    public ViewFacade(IModel model) throws IOException
     {
         super();
-        this.Bone.loadImage();
-        this.H_Bone.loadImage();
-        this.V_Bone.loadImage();
-        this.Nothing.loadImage();
-        this.closeGate.loadImage();
-        ReadMap();
+        this.model.getMap().getBone().loadImage();
+        this.model.getMap().getH_Bone().loadImage();
+        this.model.getMap().getV_Bone().loadImage();
+        this.model.getMap().getNothing().loadImage();
+        this.model.getMap().getCloseGate().loadImage();
+        model.getMap().readMap();
     }
     public void run() 
     {
         final BoardFrame boardFrame = new BoardFrame("LORANN GAME");
-        boardFrame.setDimension(new Dimension(width, height));
+        boardFrame.setDimension(new Dimension(map.getWidth(), map.getHeight()));
         boardFrame.setDisplayFrame(lorannGame);
         boardFrame.setSize(sizeFrameWidth, sizeFrameHeight);
         boardFrame.setLocationRelativeTo(null);
@@ -75,78 +56,29 @@ public class ViewFacade implements IView
         //Frame Configure
         this.frameConfigure(boardFrame);
     }
-    public final void ReadMap()
-    {
-    	try
-        {
-            fileReader = new FileReader(f);
-        }
-        catch (FileNotFoundException exception)
-        {
-            System.out.println("File not found");
-        }
-        //Lecture
-        try
-        {
-            int c = 0;
-            for (int y = 0; y < height ; y++) 
-            {
-                for (int x = 0; x < width; x++) 
-                {
-                	c = fileReader.read();
-                	choice = (char)c;
-                	switch (choice) 
-                	{
-	        		case 'B' :
-	        			mapRead[x][y] = 'B';
-	        			break;
-	        			
-	        		case 'H' : 
-	        			mapRead[x][y] = 'H';
-	        			break;
-	        			
-	        		case 'V' : 
-	        			mapRead[x][y] = 'V';
-	        			break;
-	        		
-	        		case 'N' : 
-	        			mapRead[x][y] = 'N';
-	        			break;
-	        			
-	        		case 'C' :
-	        			mapRead[x][y] = 'C';
-	        			break;
-                	}
-                }
-            }
-        }
-        catch (IOException exception)
-        {
-            System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
-        }
-    }
+   
     public final void frameConfigure(final BoardFrame frame) 
     {
 		
-    	for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++)
+    	for (int y = 0; y < map.getHeight(); y++) {
+            for (int x = 0; x < map.getWidth(); x++)
             {
-            	switch(mapRead[x][y])
+            	switch(model.getMap().mapRead[x][y])
             	{
             		case 'B':
-            			frame.addSquare(Bone, x, y);
+            			frame.addSquare(model.getMap().getBone(), x, y);
             			break;
             		case 'H':
-            			frame.addSquare(H_Bone, x, y);
+            			frame.addSquare(model.getMap().getH_Bone(), x, y);
             			break;
             		case 'V':
-            			frame.addSquare(V_Bone, x, y);
+            			frame.addSquare(model.getMap().getV_Bone(), x, y);
             			break;
             		case 'N':
-            			frame.addSquare(Nothing, x, y);
+            			frame.addSquare(model.getMap().getNothing(), x, y);
         				break;
             		case 'C':
-            			frame.addSquare(closeGate, x, y);
+            			frame.addSquare(model.getMap().getCloseGate(), x, y);
         				break;
             	}
             }
