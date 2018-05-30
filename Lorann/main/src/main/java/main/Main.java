@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import controller.ControllerFacade;
@@ -27,8 +28,9 @@ public abstract class Main
      *
      * @param args
      *            the arguments
+     * @throws IOException 
      */
-    public static void main(final String[] args) 
+    public static void main(final String[] args) throws IOException 
     {
     	final IModel model = new ModelFacade();
     	final ViewFacade view = new ViewFacade(model.getMap());

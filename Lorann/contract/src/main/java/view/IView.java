@@ -1,5 +1,7 @@
 package view;
 
+
+
 /**
  * <h1>The Interface IView.</h1>
  *
@@ -9,5 +11,4 @@ package view;
 public interface IView 
 {
 	public void run();
-
 }

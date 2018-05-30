@@ -1,6 +1,7 @@
 package showboard;
 
 import java.awt.Image;
+import java.io.IOException;
 
 /**
  * <h1>The Interface ISquare.</h1>
@@ -12,12 +13,15 @@ import java.awt.Image;
  * @version 1.1
  * @see Image
  */
-public interface ISquare {
+public interface ISquare 
+{
 
-    /**
+
+	/**
      * Gets the image.
      *
      * @return the image
+	 * @throws IOException 
      */
     Image getImage();
 }

@@ -1,16 +1,21 @@
 package model;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Observable;
 
+
+
+import showboard.*;
+
 public class map extends Observable implements IMap
 {
-
-	private int Hight;
-	private int Width;
+	private ISquare square; 
+	private static int Hight = 12;
+	private static int Width = 20;
 	File f = new File("annex/MAP1.txt");
     FileReader fileReader;
     public char choice;
@@ -18,16 +23,12 @@ public class map extends Observable implements IMap
 	
 	public map () 
 	{
-		this.Hight = 12;
-		this.Width = 20;
 		this.mapObstacle = new obstacle [Width] [Hight];
 		
 		for (int y = 0; y < Hight;y++) 
 		{
 			for (int x = 0; x < Width;x++) 
 			{
-				System.out.println("ini x " + x);
-            	System.out.println("ini y " + y);
 				this.mapObstacle [x] [y] = null;
 			}
 		}
@@ -61,25 +62,24 @@ public class map extends Observable implements IMap
             		y++;
             		x = 0;
             	}	
-                //Message += (char)c;
                 choice = (char)c;
-                System.out.println("je suis en x = " + x + " et en y = " + y + " et je suis : " + choice);
+                //System.out.println("je suis en x = " + x + " et en y = " + y + " et je suis : " + choice);
         		switch (choice) {
         		
 	        		case 'B' :
-	        			this.mapObstacle [x] [y] = new obstacle ('B');
+	        			//this.mapObstacle [x] [y] = new obstacle ('B');
 	        			break;
 	        			
 	        		case 'H' : 
-	        			this.mapObstacle [x] [y] = new obstacle ('H');
+	        			//this.mapObstacle [x] [y] = new obstacle ('H');
 	        			break;
 	        			
 	        		case 'V' : 
-	        			this.mapObstacle [x] [y] = new obstacle ('V');
+	        			//this.mapObstacle [x] [y] = new obstacle ('V');
 	        			break;
 	        		
 	        		case 'N' : 
-	        			this.mapObstacle [x] [y] = new obstacle ('N');
+	        			//this.mapObstacle [x] [y] = new obstacle ('N');
 	        			break;
         		}
                 x++;
@@ -124,5 +124,15 @@ public class map extends Observable implements IMap
 	{
 		Width = width;
 	}
-	
+
+
+	public ISquare getSquare() {
+		return square;
+	}
+
+
+	public void setSquare(int x,int y) 
+	{
+		this.square =  mapObstacle[x][y];
+	}
 }
