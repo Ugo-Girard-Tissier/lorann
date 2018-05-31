@@ -49,6 +49,9 @@ public class ViewFacade extends Observable implements IView, Runnable
         this.model.getMap().getNothing().loadImage();
         this.model.getMap().getCloseGate().loadImage();
         this.model.getMap().getLorann().loadImage();
+        this.model.getMap().getPurse().loadImage();
+        this.model.getMap().getCrystallBall().loadImage();
+        this.model.getMap().getOpenGate().loadImage();
     }
     public void run() 
     {
@@ -83,9 +86,15 @@ public class ViewFacade extends Observable implements IView, Runnable
             		case 'N':
             			frame.addSquare(model.getMap().getNothing(), x, y);
         				break;
-            		case 'C':
+            		case 'G':
             			frame.addSquare(model.getMap().getCloseGate(), x, y);
         				break;
+            		case 'P':
+            			frame.addSquare(model.getMap().getPurse(), x, y);
+    					break;
+            		case 'C':
+            			frame.addSquare(model.getMap().getCrystallBall(), x, y);
+            			break;
             	}
             }
             frame.addPawn(this.model.getMap().getLorann());
@@ -107,5 +116,46 @@ public class ViewFacade extends Observable implements IView, Runnable
 		this.setChanged();
         this.notifyObservers();
 	}
-
+	
+	public void OpenGate(int x, int y)
+	{
+		if (this.model.getMap().mapRead[x][y] == 'C')
+		{
+			this.updateMapElements("gateopen", x, y);
+		}
+	}
+	
+	public void getPurse(int x, int y)
+	{
+		if (this.model.getMap().mapRead[x][y] == 'P')
+		{
+			this.updateMapElements("purse", x, y);
+		}
+	}
+	
+	public void updateMapElements(String Elements,int x,int y)
+	{
+		switch(Elements)
+		{
+			case "gateopen":
+				getBoardFrame().addSquare(model.getMap().getNothing(), x, y);
+				for (int yMap = 0; yMap < map.getHeight(); yMap++) 
+				{
+		            for (int xMap = 0; xMap < map.getWidth(); xMap++)
+		            {
+		            	if(model.getMap().mapRead[xMap][yMap] == 'G')
+		            	{
+		            		x = xMap;
+		            		y = yMap;
+		            		getBoardFrame().addSquare(model.getMap().getOpenGate(), x, y);
+		            	}
+		            }
+				}
+				break;
+			case "purse":
+				getBoardFrame().addSquare(model.getMap().getNothing(), x, y);
+				break;
+		}
+	}
+	
 }
