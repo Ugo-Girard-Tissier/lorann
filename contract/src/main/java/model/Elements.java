@@ -8,13 +8,13 @@ import javax.imageio.ImageIO;
 
 import showboard.ISquare;
 
-public class obstacle implements ISquare
+public class Elements implements ISquare
 {
 	
 	public Image img_ob;
 	public String nameFile;
 	
-	public obstacle(final String nameFile)
+	public Elements(final String nameFile)
 	{
 		this.setImageName(nameFile);
 	}

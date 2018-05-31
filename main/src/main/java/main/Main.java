@@ -17,7 +17,7 @@ import view.ViewFacade;
  * @author Abdel, Arthur, Enzo, Sulyven and Ugo group
  * @version 1.0
  */
-public abstract class Main /////////
+public abstract class Main ////////////////////////////
 {
 
 	//test git git
@@ -39,6 +39,9 @@ public abstract class Main /////////
         try 
         {
             controller.start();
+            
+            System.out.println("test");
+            
         } 
         catch (final SQLException exception) 
         {
