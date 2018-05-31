@@ -61,18 +61,8 @@ public class ViewFacade extends Observable implements IView, Runnable
         //Frame Configure
         this.frameConfigure(boardFrame);
     }
-   
-    public final void move() throws InterruptedException 
-    {
-        for (;;) 
-        {
-            this.model.getMap().getLorann().animationLorann();
-            this.updateMap();
-            Thread.sleep(timeLoop);
-        }
-    }
-    
-    
+       
+  
     public final void frameConfigure(final BoardFrame frame) 
     {
 		

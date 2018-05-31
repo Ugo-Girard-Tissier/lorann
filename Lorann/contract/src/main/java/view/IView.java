@@ -11,7 +11,6 @@ import showboard.BoardFrame;
 public interface IView 
 {
 	public void run();
-	public void move() throws InterruptedException;
 	public void updateMap();
 	public BoardFrame getBoardFrame();
 	public void setBoardFrame(BoardFrame boardFrame);

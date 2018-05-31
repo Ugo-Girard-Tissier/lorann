@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.IModel;
+import model.thread_lorann;
 import view.IView;
 
 /**
@@ -21,6 +22,8 @@ public class ControllerFacade implements IController, KeyListener
     private final IView  view;
     /** The model. */
     private final IModel model;
+    
+    thread_lorann thread;
 
     /**
      * Instantiates a new controller facade.
@@ -34,6 +37,7 @@ public class ControllerFacade implements IController, KeyListener
         super();
         this.view = view;
         this.model = model;
+        this.thread = new thread_lorann ("test", this);
     }
 
     /**
@@ -46,6 +50,7 @@ public class ControllerFacade implements IController, KeyListener
     public void start() throws SQLException, InterruptedException 
     {
     	this.getView().run();
+    	this.thread.start();
     	//this.getView().move();
     	this.getView().getBoardFrame().addKeyListener(this);
     	this.getView().getBoardFrame().requestFocus();
@@ -79,52 +84,47 @@ public class ControllerFacade implements IController, KeyListener
 	public void keyPressed(KeyEvent e) 
 	{
 		int keyCode = e.getKeyCode();
-		
-		System.out.println(keyCode);
-
-		
+			
 			//this.getModel().getMap().getLorann().animationLorann();
 			//this.getView().updateMap();
 		
 		switch(keyCode)
 		{
 			case KeyEvent.VK_NUMPAD1:
-				System.out.println(keyCode);
+				
+				//this.setChangement(1);
+				
 				this.getModel().getMap().getLorann().leftMouvementLorann();
 				this.getView().updateMap();
+					
+				//this.setChangement(0);
+				
 				break;
 			case KeyEvent.VK_NUMPAD2:
-				System.out.println(keyCode);
 				this.getModel().getMap().getLorann().backwardMouvementLorann();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD3:
-				System.out.println(keyCode);
 				this.getModel().getMap().getLorann().rightMouvementLorann();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD5:
-				System.out.println(keyCode);
 				this.getModel().getMap().getLorann().forwardMouvementLorann();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD6:
-				System.out.println(keyCode);
 				this.getModel().getMap().getLorann().diagonalRightForwardMouvementLorann();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD4:
-				System.out.println(keyCode);
 				this.getModel().getMap().getLorann().diagonalLeftForwardMouvementLorann();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_E:
-				System.out.println(keyCode);
 				this.getModel().getMap().getLorann().diagonalRightBackwardMouvementLorann();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_Z:
-				System.out.println(keyCode);
 				this.getModel().getMap().getLorann().diagonalLeftBackwardMouvementLorann();
 				this.getView().updateMap();
 				break;
