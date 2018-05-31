@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,11 +15,14 @@ public final class ModelFacade implements IModel
 {
 	private map Map;
 	
+	
 	/**
      * Instantiates a new model facade.
+	 * @throws IOException 
      */
-    public ModelFacade() 
+    public ModelFacade() throws IOException 
     {
+    	super();
     	this.Map = new map();
     }
     public map getMap() 

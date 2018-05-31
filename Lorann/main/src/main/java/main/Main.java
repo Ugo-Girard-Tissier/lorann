@@ -29,8 +29,9 @@ public abstract class Main
      * @param args
      *            the arguments
      * @throws IOException 
+     * @throws InterruptedException 
      */
-    public static void main(final String[] args) throws IOException 
+    public static void main(final String[] args) throws IOException, InterruptedException 
     {
     	final IModel model = new ModelFacade();
     	final ViewFacade view = new ViewFacade(model);
@@ -44,6 +45,7 @@ public abstract class Main
         {
             exception.printStackTrace();
         }
+        view.move();
     }
 
 }

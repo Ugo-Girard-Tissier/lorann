@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Observable;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -20,10 +21,10 @@ import model.*;
  * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
  * @version 1.0
  */
-public class ViewFacade implements IView
+public class ViewFacade extends Observable implements IView, Runnable
 {
 
-	private static final int timeLoop = 300;
+	private static final int timeLoop = 100;
 	
 	private static final int sizeFrameWidth = 1280;
 	
@@ -38,12 +39,14 @@ public class ViewFacade implements IView
     public ViewFacade(IModel model) throws IOException
     {
         super();
+        this.model = model;
         this.model.getMap().getBone().loadImage();
         this.model.getMap().getH_Bone().loadImage();
         this.model.getMap().getV_Bone().loadImage();
         this.model.getMap().getNothing().loadImage();
         this.model.getMap().getCloseGate().loadImage();
-        model.getMap().readMap();
+        this.model.getMap().getLorann().loadImage();
+        this.model.getMap().getLorann().setPosition(this.model.getMap().getLorann().getStartX(),this.model.getMap().getLorann().getStartY());
     }
     public void run() 
     {
@@ -57,6 +60,18 @@ public class ViewFacade implements IView
         this.frameConfigure(boardFrame);
     }
    
+    public final void move() throws InterruptedException 
+    {
+        for (;;) 
+        {
+            this.model.getMap().getLorann().moveLorann();
+            this.setChanged();
+            this.notifyObservers();
+            Thread.sleep(timeLoop);
+        }
+    }
+    
+    
     public final void frameConfigure(final BoardFrame frame) 
     {
 		
@@ -82,7 +97,10 @@ public class ViewFacade implements IView
         				break;
             	}
             }
+            frame.addPawn(this.model.getMap().getLorann());
         }
+    	
+    	this.addObserver(frame.getObserver());
         frame.setVisible(true);
     }
 	

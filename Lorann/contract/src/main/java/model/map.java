@@ -16,7 +16,9 @@ public class map
 
 	private final obstacle Nothing = new obstacle("/void.png");
 		
-	private final obstacle closeGate = new obstacle("/gate_closed.png");
+	private obstacle closeGate = new obstacle("/gate_closed.png");
+	
+	private Lorann lorann;
 	
 	File f = new File("annex/MAP2.txt");
     FileReader fileReader;
@@ -24,7 +26,12 @@ public class map
     public char mapRead[][] = new char[width][height];
     private final static int height = 12;
 	private final static int width = 20;
-    
+	
+    public map() throws IOException
+    {
+    	readMap();
+    	this.lorann = new Lorann("/lorann_1.png", this);
+    }
     
 	public void readMap()
 	{
@@ -76,11 +83,10 @@ public class map
 	        System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
 	    }
 	}
+	
 	 public static int getHeight() {
 			return height;
 		}
-
-
 		public static int getWidth() {
 			return width;
 		}
@@ -98,5 +104,20 @@ public class map
 		}
 		public obstacle getCloseGate() {
 			return closeGate;
+		}
+		
+		public void setCloseGate(obstacle CloseGate_p)
+		{
+			this.closeGate = CloseGate_p;
+		}
+		
+		public Lorann getLorann() 
+		{
+			return lorann;
+		}
+		
+		public void setLorann(Lorann lorann_p)
+		{
+			this.lorann = lorann_p;
 		}
 }
