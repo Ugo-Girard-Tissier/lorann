@@ -36,7 +36,6 @@ public abstract class Main
     	final IModel model = new ModelFacade();
     	final ViewFacade view = new ViewFacade(model);
         final ControllerFacade controller = new ControllerFacade(view, model);
-        
         try 
         {
             controller.start();
@@ -45,7 +44,6 @@ public abstract class Main
         {
             exception.printStackTrace();
         }
-        view.move();
     }
 
 }

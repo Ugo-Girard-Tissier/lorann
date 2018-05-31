@@ -24,6 +24,7 @@ public class Lorann extends Mobile implements IPawn
 		super(nameFile);
 		this.map = Map;
 		this.RandomStartPosition();
+		this.setPosition(getStartX(), getStartY());
 		this.imageLorann = new Image[8];
 		int y = 0;
 		for (int i = 1; i <= 8;i++)
@@ -35,21 +36,20 @@ public class Lorann extends Mobile implements IPawn
 	}
 
 	@Override
-	public int getX() {
-		// TODO Auto-generated method stub
+	public int getX() 
+	{
 		return this.getPosition().x;
 	}
 
 	@Override
-	public int getY() {
-		// TODO Auto-generated method stub
+	public int getY() 
+	{
 		return this.getPosition().y;
 	}
 
 	@Override
 	public Point getPosition() 
 	{
-		// TODO Auto-generated method stub
 		return this.Positon;
 	}
 
@@ -87,7 +87,7 @@ public class Lorann extends Mobile implements IPawn
 	this.startY = valuesY;
 	}
 	
-	public final void moveLorann()
+	public final void animationLorann()
 	{
 		if (numberImage == 8)
 		{
@@ -95,5 +95,98 @@ public class Lorann extends Mobile implements IPawn
 		}
 		this.setImage(imageLorann[numberImage]);
 		numberImage++;
+	}
+	
+	public final void rightMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewX = NewX + 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[2]);
+		}
+	}
+	public final void leftMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewX = NewX - 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[6]);
+		}
+	}
+	public final void forwardMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewY = NewY - 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[0]);
+		}
+	}
+	public final void backwardMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewY = NewY + 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[4]);
+		}
+	}
+	public final void diagonalRightForwardMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewX = NewX + 1;
+		NewY = NewY - 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[1]);
+		}
+	}
+	public final void diagonalLeftForwardMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewX = NewX - 1;
+		NewY = NewY - 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[7]);
+		}
+	}
+	public final void diagonalRightBackwardMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewX = NewX + 1;
+		NewY = NewY + 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[3]);
+		}
+	}
+	public final void diagonalLeftBackwardMouvementLorann()
+	{
+		int NewX = this.getX();
+		int NewY = this.getY();
+		NewX = NewX - 1;
+		NewY = NewY + 1;
+		if (this.map.mapRead[NewX][NewY] != 'B' && this.map.mapRead[NewX][NewY] != 'H' && this.map.mapRead[NewX][NewY] != 'V')
+		{
+			this.setPosition(NewX, NewY);
+			this.setImage(imageLorann[5]);
+		}
 	}
 }

@@ -33,7 +33,10 @@ public class ViewFacade extends Observable implements IView, Runnable
 	private static final Rectangle lorannGame = new Rectangle(0 ,0 ,map.getWidth(),map.getHeight());
 	
 	private IModel model;
-    /**
+	
+	private BoardFrame boardFrame;
+    
+	/**
      * Instantiates a new view facade.
      */
     public ViewFacade(IModel model) throws IOException
@@ -46,16 +49,15 @@ public class ViewFacade extends Observable implements IView, Runnable
         this.model.getMap().getNothing().loadImage();
         this.model.getMap().getCloseGate().loadImage();
         this.model.getMap().getLorann().loadImage();
-        this.model.getMap().getLorann().setPosition(this.model.getMap().getLorann().getStartX(),this.model.getMap().getLorann().getStartY());
     }
     public void run() 
     {
-        final BoardFrame boardFrame = new BoardFrame("LORANN GAME");
+        this.boardFrame = new BoardFrame("LORANN GAME");
         boardFrame.setDimension(new Dimension(map.getWidth(), map.getHeight()));
         boardFrame.setDisplayFrame(lorannGame);
         boardFrame.setSize(sizeFrameWidth, sizeFrameHeight);
         boardFrame.setLocationRelativeTo(null);
-        
+   
         //Frame Configure
         this.frameConfigure(boardFrame);
     }
@@ -64,9 +66,8 @@ public class ViewFacade extends Observable implements IView, Runnable
     {
         for (;;) 
         {
-            this.model.getMap().getLorann().moveLorann();
-            this.setChanged();
-            this.notifyObservers();
+            this.model.getMap().getLorann().animationLorann();
+            this.updateMap();
             Thread.sleep(timeLoop);
         }
     }
@@ -103,6 +104,18 @@ public class ViewFacade extends Observable implements IView, Runnable
     	this.addObserver(frame.getObserver());
         frame.setVisible(true);
     }
-	
+    
+    public BoardFrame getBoardFrame() {
+		return boardFrame;
+	}
+	public void setBoardFrame(BoardFrame boardFrame) {
+		this.boardFrame = boardFrame;
+	}
+    
+	public void updateMap()
+	{
+		this.setChanged();
+        this.notifyObservers();
+	}
 
 }
