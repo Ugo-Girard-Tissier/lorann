@@ -41,14 +41,14 @@ public class map
 	//characteristic of the map
 	private int numberOfCrystallBall = 0;
 	private int scoreLorann = 0;
+	private String map;
 	
-	public map() throws IOException
+	public map(String map_p) throws IOException
     {
-    	readMap();
-    	this.lorann = new Lorann("/lorann_1.png", this);
-    	this.Monster1 = new Monster("/monster_1.png", this);
-    	this.Monster2 = new Monster("/monster_2.png", this);
-    	calculatedNumberOfCrystallBall();
+        this.map = map_p;
+        this.readmapBDD();
+        this.lorann = new Lorann("/lorann_1.png", this);
+        this.Monster1 = new Monster("/monster_1.png",this);
     }
     
 	private void readMap()
@@ -110,6 +110,51 @@ public class map
 	    }
 	}
 	
+	public void readmapBDD () {
+
+        char choice;
+        int i = 0;
+
+         for (int y = 0; y < height ; y++) 
+            {
+                for (int x = 0; x < width; x++) 
+                {
+
+                    choice = this.map.charAt(i);
+
+                            switch (choice) 
+                            {
+                            case 'B' :
+                                mapRead[x][y] = 'B';
+                                break;
+
+                            case 'H' : 
+                                mapRead[x][y] = 'H';
+                                break;
+
+                            case 'V' :
+                                mapRead[x][y] = 'V';
+                                break;
+
+                            case 'N' :
+                                mapRead[x][y] = 'N';
+                                break;
+
+                            case 'G' :
+                                mapRead[x][y] = 'G';
+                                break;
+                            case 'P' :
+                                mapRead[x][y] = 'P';
+                                break;
+                            case 'C' :
+                                mapRead[x][y] = 'C';
+                                break;
+                            }
+                            i++;
+                }
+            }
+    }
+	
 	private void calculatedNumberOfCrystallBall()
 	{
 		for (int y = 0; y < height ; y++) 
@@ -134,6 +179,16 @@ public class map
 		this.mapRead[x][y] = 'O';
 	}
 	
+	public String getMap()
+	{
+        return map;
+    }
+
+    public void setMap(String map) 
+    {
+        this.map = map;
+    }
+    
 	public static int getHeight() 
 	{
 		return height;

@@ -14,16 +14,21 @@ import java.util.List;
 public final class ModelFacade implements IModel
 {
 	private map Map;
+	LorannDAO DAO;
 	
 	/**
      * Instantiates a new model facade.
 	 * @throws IOException 
      */
-    public ModelFacade() throws IOException 
+	public ModelFacade() throws IOException, SQLException 
     {
-    	super();
-    	this.Map = new map();
+        super();
+        this.DAO = new LorannDAO();
+        this.DAO.open();
+        this.Map = new map(this.DAO.getMAp(5));
+        this.DAO.close();
     }
+	
     public map getMap() 
     {
 		return Map;
