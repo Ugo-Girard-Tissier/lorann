@@ -23,7 +23,9 @@ public class thread_monster extends Thread
 		while (controller.getView().getStop() == 0) 
 		{
 		
-				 controller.getModel().getMap().getMonster1().RamdomMovingMonster();
+				 controller.getModel().getMap().getMonster2().RamdomMovingMonster();
+				 controller.getModel().getMap().getMonster3().RamdomMovingMonster();
+				 controller.getView().monsterReachingLorann();
 				 controller.getView().updateMap();
 				 
 				 try {

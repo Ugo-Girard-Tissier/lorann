@@ -6,9 +6,6 @@ import java.sql.SQLException;
 import controller.ControllerFacade;
 import model.IModel;
 import model.ModelFacade;
-import model.map;
-import model.Elements;
-import showboard.BoardFrame;
 import view.ViewFacade;
 
 /**

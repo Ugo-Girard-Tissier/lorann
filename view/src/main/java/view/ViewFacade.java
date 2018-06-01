@@ -49,6 +49,9 @@ public class ViewFacade extends Observable implements IView, Runnable
         this.model.getMap().getCloseGate().loadImage();
         this.model.getMap().getLorann().loadImage();
         this.model.getMap().getMonster1().loadImage();
+        this.model.getMap().getMonster2().loadImage();
+        this.model.getMap().getMonster3().loadImage();
+        this.model.getMap().getMonster4().loadImage();
         this.model.getMap().getPurse().loadImage();
         this.model.getMap().getCrystallBall().loadImage();
         this.model.getMap().getOpenGate().loadImage();
@@ -98,6 +101,9 @@ public class ViewFacade extends Observable implements IView, Runnable
             }
             frame.addPawn(this.model.getMap().getLorann());
             frame.addPawn(this.model.getMap().getMonster1());
+            frame.addPawn(this.model.getMap().getMonster2());
+            frame.addPawn(this.model.getMap().getMonster3());
+            frame.addPawn(this.model.getMap().getMonster4());
         }
     	
     	this.addObserver(frame.getObserver());
@@ -159,14 +165,39 @@ public class ViewFacade extends Observable implements IView, Runnable
 		{
 			getBoardFrame().dispose();
 			JOptionPane.showMessageDialog(null, "You Win !!!\nYour score : " + this.model.getMap().getScoreLorann(),"Congratulation !!!", JOptionPane.INFORMATION_MESSAGE, winIcon);
-			this.setStop(1);
+			if (this.model.getMap_choice() <= 4)
+            {
+                this.model.setMap_choice(this.model.getMap_choice() + 1);
+                this.model.connection();
+                this.model.getMap().readmapBDD();
+                this.model.getMap().calculatedNumberOfCrystallBall();
+                this.frameConfigure(boardFrame);
+            }
+            else
+                this.setStop(1);
 		}
 	}
 	
 	public void reachingThreat(int x, int y)
 	{
 		ImageIcon loseIcon = new ImageIcon("annex/game_over.png");
-		if (this.model.getMap().mapRead[x][y] == 'G' && (this.model.getMap().getLorann().getX() == this.model.getMap().getMonster1().getStartX()))
+		if (this.model.getMap().mapRead[x][y] == 'G' 
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster1().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster1().getY()))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster2().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster2().getY()))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster3().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster3().getY())))
+		{
+			getBoardFrame().dispose();
+			JOptionPane.showMessageDialog(null, "Unfortunately... You Lose..\nYour score : "+ this.model.getMap().getScoreLorann(), "Too Bad...", JOptionPane.INFORMATION_MESSAGE, loseIcon);
+			this.setStop(1);
+		}
+	}
+	
+	public void monsterReachingLorann()
+	{
+		ImageIcon loseIcon = new ImageIcon("annex/game_over.png");
+		if (((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster1().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster1().getY()))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster2().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster2().getY()))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster3().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster3().getY())))
 		{
 			getBoardFrame().dispose();
 			JOptionPane.showMessageDialog(null, "Unfortunately... You Lose..\nYour score : "+ this.model.getMap().getScoreLorann(), "Too Bad...", JOptionPane.INFORMATION_MESSAGE, loseIcon);

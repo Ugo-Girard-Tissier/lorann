@@ -30,6 +30,10 @@ public class map
 	
 	private Monster Monster2;
 	
+	private Monster Monster3;
+	
+	private Monster Monster4;
+	
 	//Reading the file
 	File f = new File("annex/MAP5.txt");
     FileReader fileReader;
@@ -49,6 +53,10 @@ public class map
         this.readmapBDD();
         this.lorann = new Lorann("/lorann_1.png", this);
         this.Monster1 = new Monster("/monster_1.png",this);
+        this.Monster2 = new Monster("/monster_2.png",this);
+        this.Monster3 = new Monster("/monster_3.png",this);
+        this.Monster4 = new Monster("/monster_4.png",this);
+        this.calculatedNumberOfCrystallBall();
     }
     
 	private void readMap()
@@ -155,7 +163,7 @@ public class map
             }
     }
 	
-	private void calculatedNumberOfCrystallBall()
+	public void calculatedNumberOfCrystallBall()
 	{
 		for (int y = 0; y < height ; y++) 
         {
@@ -307,5 +315,25 @@ public class map
 	public void setMonster2(Monster monster2) 
 	{
 		Monster2 = monster2;
+	}
+	
+	public Monster getMonster3() 
+	{
+		return Monster3;
+	}
+
+	public void setMonster3(Monster monster3) 
+	{
+		Monster3 = monster3;
+	}
+	
+	public Monster getMonster4() 
+	{
+		return Monster4;
+	}
+
+	public void setMonster4(Monster monster4) 
+	{
+		Monster4 = monster4;
 	}
 }
