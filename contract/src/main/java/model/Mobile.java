@@ -1,13 +1,11 @@
 package model;
 
 import java.awt.Image;
-import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import showboard.IPawn;
 import showboard.ISquare;
 
 public abstract class Mobile implements ISquare
@@ -25,7 +23,7 @@ public abstract class Mobile implements ISquare
 	{
         return this.img;
     }
-
+	
     /* Load image.
      *
      * @throws IOException Signals that an I/O exception has occurred.

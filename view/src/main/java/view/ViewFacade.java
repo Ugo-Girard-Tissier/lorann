@@ -1,14 +1,11 @@
 package view;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Observable;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 import showboard.BoardFrame;
 import model.*;
@@ -35,6 +32,8 @@ public class ViewFacade extends Observable implements IView, Runnable
 	private IModel model;
 	
 	private BoardFrame boardFrame;
+	
+	private int stop = 0;
     
 	/**
      * Instantiates a new view facade.
@@ -49,6 +48,7 @@ public class ViewFacade extends Observable implements IView, Runnable
         this.model.getMap().getNothing().loadImage();
         this.model.getMap().getCloseGate().loadImage();
         this.model.getMap().getLorann().loadImage();
+        this.model.getMap().getMonster1().loadImage();
         this.model.getMap().getPurse().loadImage();
         this.model.getMap().getCrystallBall().loadImage();
         this.model.getMap().getOpenGate().loadImage();
@@ -60,7 +60,6 @@ public class ViewFacade extends Observable implements IView, Runnable
         boardFrame.setDisplayFrame(lorannGame);
         boardFrame.setSize(sizeFrameWidth, sizeFrameHeight);
         boardFrame.setLocationRelativeTo(null);
-   
         //Frame Configure
         this.frameConfigure(boardFrame);
     }
@@ -98,6 +97,7 @@ public class ViewFacade extends Observable implements IView, Runnable
             	}
             }
             frame.addPawn(this.model.getMap().getLorann());
+            frame.addPawn(this.model.getMap().getMonster1());
         }
     	
     	this.addObserver(frame.getObserver());
@@ -110,6 +110,13 @@ public class ViewFacade extends Observable implements IView, Runnable
 	public void setBoardFrame(BoardFrame boardFrame) {
 		this.boardFrame = boardFrame;
 	}
+	
+	public int getStop() {
+		return stop;
+	}
+	public void setStop(int stop) {
+		this.stop = stop;
+	}
     
 	public void updateMap()
 	{
@@ -119,9 +126,17 @@ public class ViewFacade extends Observable implements IView, Runnable
 	
 	public void OpenGate(int x, int y)
 	{
+		int numberOfCrystallBall = this.model.getMap().getNumberOfCrystallBall();
 		if (this.model.getMap().mapRead[x][y] == 'C')
 		{
-			this.updateMapElements("gateopen", x, y);
+			getBoardFrame().addSquare(model.getMap().getNothing(), x, y);
+			this.model.getMap().updateElementsOnMap(x,y);
+			numberOfCrystallBall = numberOfCrystallBall - 1;
+			this.model.getMap().setNumberOfCrystallBall(numberOfCrystallBall);
+			if (numberOfCrystallBall == 0)
+			{
+				this.updateMapElements("gateopen", x, y);
+			}
 		}
 	}
 	
@@ -130,6 +145,32 @@ public class ViewFacade extends Observable implements IView, Runnable
 		if (this.model.getMap().mapRead[x][y] == 'P')
 		{
 			this.updateMapElements("purse", x, y);
+			this.model.getMap().updateElementsOnMap(x,y);
+			int scoreLorann = this.model.getMap().getScoreLorann();
+			scoreLorann = scoreLorann + 650;
+			this.model.getMap().setScoreLorann(scoreLorann);
+		}
+	}
+	
+	public void reachingOpenGate(int x,int y)
+	{
+		ImageIcon winIcon = new ImageIcon("annex/reward.png");
+		if (this.model.getMap().mapRead[x][y] == 'O')
+		{
+			getBoardFrame().dispose();
+			JOptionPane.showMessageDialog(null, "You Win !!!\nYour score : " + this.model.getMap().getScoreLorann(),"Congratulation !!!", JOptionPane.INFORMATION_MESSAGE, winIcon);
+			this.setStop(1);
+		}
+	}
+	
+	public void reachingThreat(int x, int y)
+	{
+		ImageIcon loseIcon = new ImageIcon("annex/game_over.png");
+		if (this.model.getMap().mapRead[x][y] == 'G' && (this.model.getMap().getLorann().getX() == this.model.getMap().getMonster1().getStartX()))
+		{
+			getBoardFrame().dispose();
+			JOptionPane.showMessageDialog(null, "Unfortunately... You Lose..\nYour score : "+ this.model.getMap().getScoreLorann(), "Too Bad...", JOptionPane.INFORMATION_MESSAGE, loseIcon);
+			this.setStop(1);
 		}
 	}
 	
@@ -138,7 +179,6 @@ public class ViewFacade extends Observable implements IView, Runnable
 		switch(Elements)
 		{
 			case "gateopen":
-				getBoardFrame().addSquare(model.getMap().getNothing(), x, y);
 				for (int yMap = 0; yMap < map.getHeight(); yMap++) 
 				{
 		            for (int xMap = 0; xMap < map.getWidth(); xMap++)
@@ -147,6 +187,7 @@ public class ViewFacade extends Observable implements IView, Runnable
 		            	{
 		            		x = xMap;
 		            		y = yMap;
+		            		this.model.getMap().updateGateOnMap(xMap, yMap);
 		            		getBoardFrame().addSquare(model.getMap().getOpenGate(), x, y);
 		            	}
 		            }

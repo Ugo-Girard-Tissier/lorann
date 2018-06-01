@@ -15,7 +15,6 @@ public final class ModelFacade implements IModel
 {
 	private map Map;
 	
-	
 	/**
      * Instantiates a new model facade.
 	 * @throws IOException 

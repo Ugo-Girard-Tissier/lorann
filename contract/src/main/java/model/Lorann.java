@@ -64,11 +64,13 @@ public class Lorann extends Mobile implements IPawn
 		this.Positon = new Point(x,y);
 	}
 	
-	public int getStartX() {
+	public int getStartX() 
+	{
 		return startX;
 	}
 
-	public int getStartY() {
+	public int getStartY() 
+	{
 		return startY;
 	}
 	

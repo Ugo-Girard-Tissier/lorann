@@ -15,6 +15,10 @@ public interface IView
 	public void updateMapElements(String Elements,int x,int y);
 	public void OpenGate(int x, int y);
 	public void getPurse(int x, int y);
+	public void reachingOpenGate(int x,int y);
+	public void reachingThreat(int x, int y);
 	public BoardFrame getBoardFrame();
 	public void setBoardFrame(BoardFrame boardFrame);
+	public int getStop();
+	public void setStop(int stop);
 }

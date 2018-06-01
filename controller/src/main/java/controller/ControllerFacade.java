@@ -3,10 +3,10 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
-import java.util.List;
 
 import model.IModel;
 import view.thread_lorann;
+import view.thread_monster;
 import view.IView;
 
 /**
@@ -23,7 +23,9 @@ public class ControllerFacade implements IController, KeyListener
     /** The model. */
     private final IModel model;
     
-    thread_lorann thread;
+    thread_lorann thread_lorann;
+    
+    thread_monster thread_monster;
 
     /**
      * Instantiates a new controller facade.
@@ -37,7 +39,8 @@ public class ControllerFacade implements IController, KeyListener
         super();
         this.view = view;
         this.model = model;
-        this.thread = new thread_lorann ("test", this);
+        this.thread_lorann = new thread_lorann ("animationLorann", this);
+        this.thread_monster = new thread_monster ("movingMonster", this);
     }
 
     /**
@@ -50,7 +53,8 @@ public class ControllerFacade implements IController, KeyListener
     public void start() throws SQLException, InterruptedException 
     {
     	this.getView().run();
-    	this.thread.start();
+    	this.thread_lorann.start();
+    	this.thread_monster.start();
     	this.getView().getBoardFrame().addKeyListener(this);
     	this.getView().getBoardFrame().requestFocus();
     }
@@ -60,81 +64,87 @@ public class ControllerFacade implements IController, KeyListener
      *
      * @return the view
      */
-    public IView getView() {
+    public IView getView() 
+    {
         return this.view;
     }
-
     /**
      * Gets the model.
      *
      * @return the model
      */
-    public IModel getModel() {
+    public IModel getModel() 
+    {
         return this.model;
     }
 
 	@Override
 	public void keyTyped(KeyEvent e) 
-	{
-			
+	{	
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) 
 	{
 		int keyCode = e.getKeyCode();
-		
 		switch(keyCode)
 		{
 			case KeyEvent.VK_NUMPAD1:
 				this.getModel().getMap().getLorann().leftMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD2:
 				this.getModel().getMap().getLorann().backwardMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD3:
 				this.getModel().getMap().getLorann().rightMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD5:
 				this.getModel().getMap().getLorann().forwardMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD6:
 				this.getModel().getMap().getLorann().diagonalRightForwardMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_NUMPAD4:
 				this.getModel().getMap().getLorann().diagonalLeftForwardMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_E:
 				this.getModel().getMap().getLorann().diagonalRightBackwardMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
 				break;
 			case KeyEvent.VK_Z:
 				this.getModel().getMap().getLorann().diagonalLeftBackwardMouvementLorann();
-				spotEven();
+				spotEvent();
 				this.getView().updateMap();
+				break;
+			case KeyEvent.VK_ESCAPE:
+				System.exit(0);
 				break;
 			}
 	}
-	public void spotEven()
+	
+	public void spotEvent()
 	{
 		int LorannX = this.getModel().getMap().getLorann().getX();
 		int LorannY = this.getModel().getMap().getLorann().getY();
 		this.getView().OpenGate(LorannX, LorannY);
 		this.getView().getPurse(LorannX, LorannY);
+		this.getView().reachingOpenGate(LorannX, LorannY);
+		this.getView().reachingThreat(LorannX, LorannY);	
 	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) 
 	{
