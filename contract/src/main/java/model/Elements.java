@@ -37,7 +37,7 @@ public class Elements implements ISquare
     *
      * @param image the new image
      */
-    private void setImage(final Image image) 
+    protected void setImage(final Image image) 
     {
         this.img_ob = image;
     }
@@ -46,7 +46,7 @@ public class Elements implements ISquare
      *
      * @return the image name
      */
-    private String getImageName() 
+    protected String getImageName() 
     {
         return this.nameFile;
     }
@@ -55,7 +55,7 @@ public class Elements implements ISquare
      *
      * @param imageName the imageName to set
      */
-    private void setImageName(final String imageName) {
+    protected void setImageName(final String imageName) {
         this.nameFile = imageName;
     }
 }

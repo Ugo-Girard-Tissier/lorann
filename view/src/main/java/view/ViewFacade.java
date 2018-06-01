@@ -20,8 +20,6 @@ import model.*;
  */
 public class ViewFacade extends Observable implements IView, Runnable
 {
-
-	private static final int timeLoop = 100;
 	
 	private static final int sizeFrameWidth = 1280;
 	
@@ -109,21 +107,7 @@ public class ViewFacade extends Observable implements IView, Runnable
     	this.addObserver(frame.getObserver());
         frame.setVisible(true);
     }
-    
-    public BoardFrame getBoardFrame() {
-		return boardFrame;
-	}
-	public void setBoardFrame(BoardFrame boardFrame) {
-		this.boardFrame = boardFrame;
-	}
-	
-	public int getStop() {
-		return stop;
-	}
-	public void setStop(int stop) {
-		this.stop = stop;
-	}
-    
+        
 	public void updateMap()
 	{
 		this.setChanged();
@@ -228,6 +212,21 @@ public class ViewFacade extends Observable implements IView, Runnable
 				getBoardFrame().addSquare(model.getMap().getNothing(), x, y);
 				break;
 		}
+	}
+	
+	
+    public BoardFrame getBoardFrame() {
+		return boardFrame;
+	}
+	public void setBoardFrame(BoardFrame boardFrame) {
+		this.boardFrame = boardFrame;
+	}
+	
+	public int getStop() {
+		return stop;
+	}
+	public void setStop(int stop) {
+		this.stop = stop;
 	}
 	
 }

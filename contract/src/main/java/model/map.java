@@ -59,6 +59,7 @@ public class map
         this.calculatedNumberOfCrystallBall();
     }
     
+	@SuppressWarnings("unused")
 	private void readMap()
 	{
 		try

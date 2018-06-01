@@ -5,7 +5,7 @@ import java.util.Random;
 
 import showboard.IPawn;
 
-public class Monster extends Mobile implements IPawn
+public class Monster extends Elements implements IPawn
 {
 	private Point Positon;
 	private int startX;
@@ -19,45 +19,7 @@ public class Monster extends Mobile implements IPawn
 		this.RandomStartPosition();
 		this.setPosition(getStartX(), getStartY());
 	}
-	
-	@Override
-	public int getX() 
-	{
-		return this.getPosition().x;
-	}
-
-	@Override
-	public int getY() 
-	{
-		return this.getPosition().y;
-	}
-
-	@Override
-	public Point getPosition() 
-	{
-		return this.Positon;
-	}
-	
-	public final void setPosition(Point position)
-	{
-		this.Positon = position;
-	}
-	
-	public final void setPosition(final int x, final int y)
-	{
-		this.Positon = new Point(x,y);
-	}
-	
-	public int getStartX() 
-	{
-		return startX;
-	}
-
-	public int getStartY() 
-	{
-		return startY;
-	}
-	
+		
 	public final void RandomStartPosition()
 	{
 		int valuesX = 0;
@@ -192,4 +154,43 @@ public class Monster extends Mobile implements IPawn
 		}
 	}
 
+	
+	@Override
+	public int getX() 
+	{
+		return this.getPosition().x;
+	}
+
+	@Override
+	public int getY() 
+	{
+		return this.getPosition().y;
+	}
+
+	@Override
+	public Point getPosition() 
+	{
+		return this.Positon;
+	}
+	
+	public final void setPosition(Point position)
+	{
+		this.Positon = position;
+	}
+	
+	public final void setPosition(final int x, final int y)
+	{
+		this.Positon = new Point(x,y);
+	}
+	
+	public int getStartX() 
+	{
+		return startX;
+	}
+
+	public int getStartY() 
+	{
+		return startY;
+	}
+	
 }

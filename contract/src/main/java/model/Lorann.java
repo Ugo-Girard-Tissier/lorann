@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 import showboard.IPawn;
 
-public class Lorann extends Mobile implements IPawn
+public class Lorann extends Elements implements IPawn
 {
 	private Point Positon;
 	private int startX;
@@ -35,44 +35,6 @@ public class Lorann extends Mobile implements IPawn
 		
 	}
 
-	@Override
-	public int getX() 
-	{
-		return this.getPosition().x;
-	}
-
-	@Override
-	public int getY() 
-	{
-		return this.getPosition().y;
-	}
-
-	@Override
-	public Point getPosition() 
-	{
-		return this.Positon;
-	}
-
-	
-	public final void setPosition(Point position)
-	{
-		this.Positon = position;
-	}
-	
-	public final void setPosition(final int x, final int y)
-	{
-		this.Positon = new Point(x,y);
-	}
-	
-	public int getStartX() 
-	{
-		return startX;
-	}
-
-	public int getStartY() 
-	{
-		return startY;
-	}
 	
 	public final void RandomStartPosition()
 	{
@@ -191,4 +153,46 @@ public class Lorann extends Mobile implements IPawn
 			this.setImage(imageLorann[5]);
 		}
 	}
+	
+	
+
+	@Override
+	public int getX() 
+	{
+		return this.getPosition().x;
+	}
+
+	@Override
+	public int getY() 
+	{
+		return this.getPosition().y;
+	}
+
+	@Override
+	public Point getPosition() 
+	{
+		return this.Positon;
+	}
+
+	
+	public final void setPosition(Point position)
+	{
+		this.Positon = position;
+	}
+	
+	public final void setPosition(final int x, final int y)
+	{
+		this.Positon = new Point(x,y);
+	}
+	
+	public int getStartX() 
+	{
+		return startX;
+	}
+
+	public int getStartY() 
+	{
+		return startY;
+	}
+	
 }

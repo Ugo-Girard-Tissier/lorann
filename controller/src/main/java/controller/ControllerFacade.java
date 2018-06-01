@@ -64,19 +64,6 @@ public class ControllerFacade implements IController, KeyListener
      *
      * @return the view
      */
-    public IView getView() 
-    {
-        return this.view;
-    }
-    /**
-     * Gets the model.
-     *
-     * @return the model
-     */
-    public IModel getModel() 
-    {
-        return this.model;
-    }
 
 	@Override
 	public void keyTyped(KeyEvent e) 
@@ -145,9 +132,24 @@ public class ControllerFacade implements IController, KeyListener
 		this.getView().reachingThreat(LorannX, LorannY);	
 	}
 	
+	
 	@Override
 	public void keyReleased(KeyEvent e) 
 	{
 		
 	}
+	
+    public IView getView() 
+    {
+        return this.view;
+    }
+    /**
+     * Gets the model.
+     *
+     * @return the model
+     */
+    public IModel getModel() 
+    {
+        return this.model;
+    }
 }
