@@ -165,10 +165,11 @@ public class ViewFacade extends Observable implements IView, Runnable
 	public void reachingThreat(int x, int y)
 	{
 		ImageIcon loseIcon = new ImageIcon("annex/game_over.png");
-		if (this.model.getMap().mapRead[x][y] == 'G' 
+		if 	   (this.model.getMap().mapRead[x][y] == 'G' 
 			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster1().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster1().getY()))
 			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster2().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster2().getY()))
-			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster3().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster3().getY())))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster3().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster3().getY()))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster4().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster4().getY())))
 		{
 			getBoardFrame().dispose();
 			JOptionPane.showMessageDialog(null, "Unfortunately... You Lose..\nYour score : "+ this.model.getMap().getScoreLorann(), "Too Bad...", JOptionPane.INFORMATION_MESSAGE, loseIcon);
@@ -179,9 +180,10 @@ public class ViewFacade extends Observable implements IView, Runnable
 	public void monsterReachingLorann()
 	{
 		ImageIcon loseIcon = new ImageIcon("annex/game_over.png");
-		if (((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster1().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster1().getY()))
+		if    (((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster1().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster1().getY()))
 			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster2().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster2().getY()))
-			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster3().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster3().getY())))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster3().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster3().getY()))
+			|| ((this.model.getMap().getLorann().getX() == this.model.getMap().getMonster4().getX()) && (this.model.getMap().getLorann().getY() == this.model.getMap().getMonster4().getY())))
 		{
 			getBoardFrame().dispose();
 			JOptionPane.showMessageDialog(null, "Unfortunately... You Lose..\nYour score : "+ this.model.getMap().getScoreLorann(), "Too Bad...", JOptionPane.INFORMATION_MESSAGE, loseIcon);

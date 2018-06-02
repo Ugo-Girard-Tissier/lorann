@@ -69,6 +69,38 @@ public class Monster extends Elements implements IPawn
 		
 	}
 	
+	public final void monstersTrackingLorann()
+	{
+		if (this.getX() < this.map.getLorann().getX())
+			this.rightMouvementMonster();
+		else if(this.getX() > this.map.getLorann().getX())
+			this.leftMouvementMonster();
+		else if(this.getY() < this.map.getLorann().getY())
+			this.backwardMouvementMonster();
+		else if(this.getY() > this.map.getLorann().getY())
+			this.forwardMouvementMonster();
+	}
+	
+	public final void monsterTrackingLorannSmarter()
+	{
+		if (this.getX() < this.map.getLorann().getX())
+		{
+			this.rightMouvementMonster();
+		}
+		if(this.getX() > this.map.getLorann().getX())
+		{
+			this.leftMouvementMonster();
+		}
+		if(this.getY() < this.map.getLorann().getY())
+		{
+			this.backwardMouvementMonster();
+		}
+		if(this.getY() > this.map.getLorann().getY())
+		{
+			this.forwardMouvementMonster();
+		}
+	}
+
 	public final void rightMouvementMonster()
 	{
 		int NewX = this.getX();
