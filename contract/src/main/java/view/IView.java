@@ -22,4 +22,7 @@ public interface IView
 	public void setBoardFrame(BoardFrame boardFrame);
 	public int getStop();
 	public void setStop(int stop);
+	public void runBoardHome ();
+	public HomeFrame getHome();
+	public void setHome(HomeFrame home);
 }

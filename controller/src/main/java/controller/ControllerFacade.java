@@ -52,11 +52,22 @@ public class ControllerFacade implements IController, KeyListener
      */
     public void start() throws SQLException, InterruptedException 
     {
-    	this.getView().run();
-    	this.thread_lorann.start();
-    	this.thread_monster.start();
-    	this.getView().getBoardFrame().addKeyListener(this);
-    	this.getView().getBoardFrame().requestFocus();
+    	
+    	this.getView().runBoardHome();
+    	
+    	while ((this.getView().getHome().getPanEdit().getButton_choice_1_home().getChoice() == 0)) {
+    		
+    		
+    		Thread.sleep (0);
+    	}
+    	
+    	this.getView().getHome().dispose();
+    		
+        this.getView().run();
+        this.thread_lorann.start();
+        this.thread_monster.start();
+        this.getView().getBoardFrame().addKeyListener(this);
+        this.getView().getBoardFrame().requestFocus();
     }
 
     /**

@@ -30,6 +30,7 @@ public class ViewFacade extends Observable implements IView, Runnable
 	private IModel model;
 	
 	private BoardFrame boardFrame;
+	private HomeFrame Home;
 	
 	private int stop = 0;
     
@@ -64,6 +65,11 @@ public class ViewFacade extends Observable implements IView, Runnable
         //Frame Configure
         this.frameConfigure(boardFrame);
     }
+    
+    
+    public void runBoardHome () {
+    	this.setHome(new HomeFrame());
+   }
        
   
     public final void frameConfigure(final BoardFrame frame) 
@@ -229,6 +235,12 @@ public class ViewFacade extends Observable implements IView, Runnable
 	}
 	public void setStop(int stop) {
 		this.stop = stop;
+	}
+	public HomeFrame getHome() {
+		return Home;
+	}
+	public void setHome(HomeFrame home) {
+		Home = home;
 	}
 	
 }
