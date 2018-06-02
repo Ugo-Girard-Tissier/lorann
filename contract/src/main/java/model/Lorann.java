@@ -16,6 +16,7 @@ public class Lorann extends Elements implements IPawn
 	private int startX;
 	private int startY;
 	private map map;
+	private int direction;
 	private Image imageLorann[];
 	private int numberImage = 0;
 
@@ -63,6 +64,7 @@ public class Lorann extends Elements implements IPawn
 	
 	public final void rightMouvementLorann()
 	{
+		this.direction = 0;
 		int NewX = this.getX();
 		int NewY = this.getY();
 		NewX = NewX + 1;
@@ -74,6 +76,7 @@ public class Lorann extends Elements implements IPawn
 	}
 	public final void leftMouvementLorann()
 	{
+		this.direction = 1;
 		int NewX = this.getX();
 		int NewY = this.getY();
 		NewX = NewX - 1;
@@ -85,6 +88,7 @@ public class Lorann extends Elements implements IPawn
 	}
 	public final void forwardMouvementLorann()
 	{
+		this.direction = 2;
 		int NewX = this.getX();
 		int NewY = this.getY();
 		NewY = NewY - 1;
@@ -96,6 +100,7 @@ public class Lorann extends Elements implements IPawn
 	}
 	public final void backwardMouvementLorann()
 	{
+		this.direction = 3;
 		int NewX = this.getX();
 		int NewY = this.getY();
 		NewY = NewY + 1;
@@ -193,6 +198,18 @@ public class Lorann extends Elements implements IPawn
 	public int getStartY() 
 	{
 		return startY;
+	}
+
+
+	public int getDirection() 
+	{
+		return direction;
+	}
+
+
+	public void setDirection(int direction) 
+	{
+		this.direction = direction;
 	}
 	
 }

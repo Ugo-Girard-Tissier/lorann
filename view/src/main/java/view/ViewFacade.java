@@ -47,6 +47,7 @@ public class ViewFacade extends Observable implements IView, Runnable
         this.model.getMap().getNothing().loadImage();
         this.model.getMap().getCloseGate().loadImage();
         this.model.getMap().getLorann().loadImage();
+        this.model.getMap().getMagicBall().loadImage();
         this.model.getMap().getMonster1().loadImage();
         this.model.getMap().getMonster2().loadImage();
         this.model.getMap().getMonster3().loadImage();
@@ -67,7 +68,8 @@ public class ViewFacade extends Observable implements IView, Runnable
     }
     
     
-    public void runBoardHome () {
+    public void runBoardHome () 
+    {
     	this.setHome(new HomeFrame());
    }
        
@@ -118,6 +120,81 @@ public class ViewFacade extends Observable implements IView, Runnable
 	{
 		this.setChanged();
         this.notifyObservers();
+	}
+	
+	public int addMagicBall()
+	{
+		int xMagicBall = this.model.getMap().getLorann().getX();//BHVCGPO
+		int yMagicBall = this.model.getMap().getLorann().getY();
+		int addMagicBallState = 0;
+		switch(this.model.getMap().getLorann().getDirection())
+		{
+			case 0:
+				    if(this.model.getMap().mapRead[xMagicBall+1][yMagicBall] != 'B' 
+					&& this.model.getMap().mapRead[xMagicBall+1][yMagicBall] != 'H' 
+					&& this.model.getMap().mapRead[xMagicBall+1][yMagicBall] != 'V' 
+					&& this.model.getMap().mapRead[xMagicBall+1][yMagicBall] != 'C' 
+					&& this.model.getMap().mapRead[xMagicBall+1][yMagicBall] != 'G' 
+					&& this.model.getMap().mapRead[xMagicBall+1][yMagicBall] != 'P' 
+					&& this.model.getMap().mapRead[xMagicBall+1][yMagicBall] != 'O')
+					{
+						this.model.getMap().getMagicBall().setPosition(xMagicBall + 1, yMagicBall);
+						this.model.getMap().getMagicBall().setDirection(0);
+						getBoardFrame().addPawn(this.model.getMap().getMagicBall());
+						addMagicBallState = 1;
+					}
+					break;
+			case 1:
+				 	if(this.model.getMap().mapRead[xMagicBall-1][yMagicBall] != 'B' 
+					&& this.model.getMap().mapRead[xMagicBall-1][yMagicBall] != 'H' 
+					&& this.model.getMap().mapRead[xMagicBall-1][yMagicBall] != 'V' 
+					&& this.model.getMap().mapRead[xMagicBall-1][yMagicBall] != 'C' 
+					&& this.model.getMap().mapRead[xMagicBall-1][yMagicBall] != 'G' 
+					&& this.model.getMap().mapRead[xMagicBall-1][yMagicBall] != 'P' 
+					&& this.model.getMap().mapRead[xMagicBall-1][yMagicBall] != 'O')
+					{
+				 		this.model.getMap().getMagicBall().setPosition(xMagicBall - 1, yMagicBall);
+				 		this.model.getMap().getMagicBall().setDirection(1);
+				 		getBoardFrame().addPawn(this.model.getMap().getMagicBall());
+				 		addMagicBallState = 1;
+					}
+					break;
+			case 2:
+					if(this.model.getMap().mapRead[xMagicBall][yMagicBall-1] != 'B' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall-1] != 'H' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall-1] != 'V' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall-1] != 'C' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall-1] != 'G' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall-1] != 'P' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall-1] != 'O')
+					{
+						this.model.getMap().getMagicBall().setPosition(xMagicBall, yMagicBall - 1);
+						this.model.getMap().getMagicBall().setDirection(2);
+						getBoardFrame().addPawn(this.model.getMap().getMagicBall());
+						addMagicBallState = 1;
+					}
+					break;
+			case 3:
+					if(this.model.getMap().mapRead[xMagicBall][yMagicBall+1] != 'B' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall+1] != 'H' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall+1] != 'V' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall+1] != 'C' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall+1] != 'G' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall+1] != 'P' 
+					&& this.model.getMap().mapRead[xMagicBall][yMagicBall+1] != 'O')
+					{
+						this.model.getMap().getMagicBall().setPosition(xMagicBall, yMagicBall + 1);
+						this.model.getMap().getMagicBall().setDirection(3);
+						getBoardFrame().addPawn(this.model.getMap().getMagicBall());
+						addMagicBallState = 1;
+					}
+					break;
+		}
+		return addMagicBallState;	
+	}
+	
+	public void removeMagicBall()
+	{
 	}
 	
 	public void OpenGate(int x, int y)

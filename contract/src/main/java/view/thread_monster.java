@@ -7,7 +7,7 @@ public class thread_monster extends Thread
 	IController controller;
 	
 	
-	private final int loop = 7505;
+	private final int loop = 700;
 	
 	
 	public thread_monster (String name, IController controller_p)

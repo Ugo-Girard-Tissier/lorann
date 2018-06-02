@@ -13,5 +13,5 @@ public interface IController
 {
 	public IModel getModel();
 	public IView getView();
-	
+	public int getAnimationMagicBallStatement();
 }

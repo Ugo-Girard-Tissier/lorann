@@ -26,6 +26,8 @@ public class map
 	
 	private Lorann lorann;
 	
+	private MagicBall magicBall;
+	
 	private Monster Monster1;
 	
 	private Monster Monster2;
@@ -52,6 +54,7 @@ public class map
         this.map = map_p;
         this.readmapBDD();
         this.lorann = new Lorann("/lorann_1.png", this);
+        this.magicBall = new MagicBall("/fireball_1.png", this);
         this.Monster1 = new Monster("/monster_1.png",this);
         this.Monster2 = new Monster("/monster_2.png",this);
         this.Monster3 = new Monster("/monster_3.png",this);
@@ -336,5 +339,15 @@ public class map
 	public void setMonster4(Monster monster4) 
 	{
 		Monster4 = monster4;
+	}
+
+	public MagicBall getMagicBall() 
+	{
+		return magicBall;
+	}
+
+	public void setMagicBall(MagicBall magicBall) 
+	{
+		this.magicBall = magicBall;
 	}
 }

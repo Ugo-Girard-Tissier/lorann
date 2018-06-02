@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import model.IModel;
 import view.thread_lorann;
+import view.thread_magicball;
 import view.thread_monster;
 import view.IView;
 
@@ -26,7 +27,11 @@ public class ControllerFacade implements IController, KeyListener
     thread_lorann thread_lorann;
     
     thread_monster thread_monster;
-
+    
+    thread_magicball thread_magicball;
+    
+    private int animationMagicBallStatement = 0;
+    
     /**
      * Instantiates a new controller facade.
      *
@@ -41,6 +46,7 @@ public class ControllerFacade implements IController, KeyListener
         this.model = model;
         this.thread_lorann = new thread_lorann ("animationLorann", this);
         this.thread_monster = new thread_monster ("movingMonster", this);
+        this.thread_magicball = new thread_magicball ("movingMagicBall",this);
     }
 
     /**
@@ -66,6 +72,7 @@ public class ControllerFacade implements IController, KeyListener
         this.getView().run();
         this.thread_lorann.start();
         this.thread_monster.start();
+        this.thread_magicball.start();
         this.getView().getBoardFrame().addKeyListener(this);
         this.getView().getBoardFrame().requestFocus();
     }
@@ -127,6 +134,18 @@ public class ControllerFacade implements IController, KeyListener
 				spotEvent();
 				this.getView().updateMap();
 				break;
+			case KeyEvent.VK_SPACE:
+				int addMagicBall;
+				addMagicBall = this.getView().addMagicBall();
+				if (addMagicBall == 1)
+					this.animationMagicBallStatement = 1;
+				this.getView().updateMap();
+				break;
+			case KeyEvent.VK_Q:
+				this.getView().removeMagicBall();
+				this.animationMagicBallStatement = 0;
+				this.getView().updateMap();
+				break;
 			case KeyEvent.VK_ESCAPE:
 				System.exit(0);
 				break;
@@ -163,4 +182,15 @@ public class ControllerFacade implements IController, KeyListener
     {
         return this.model;
     }
+
+	public int getAnimationMagicBallStatement() 
+	{
+		return animationMagicBallStatement;
+	}
+
+	public void setAnimationMagicBallStatement(int animationMagicBallStatement) 
+	{
+		this.animationMagicBallStatement = animationMagicBallStatement;
+	}
+
 }
