@@ -141,11 +141,6 @@ public class ControllerFacade implements IController, KeyListener
 					this.animationMagicBallStatement = 1;
 				this.getView().updateMap();
 				break;
-			case KeyEvent.VK_Q:
-				this.getView().removeMagicBall();
-				this.animationMagicBallStatement = 0;
-				this.getView().updateMap();
-				break;
 			case KeyEvent.VK_ESCAPE:
 				System.exit(0);
 				break;

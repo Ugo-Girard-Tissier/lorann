@@ -26,6 +26,7 @@ public class thread_magicball extends Thread
 					{
 						controller.getModel().getMap().getMagicBall().magicBallMouvement();
 						controller.getModel().getMap().getMagicBall().animationBallMouvement();
+						controller.getModel().getMap().getMagicBall().magicBallReachMonster(controller);
 						controller.getView().updateMap();
 					}
 					 

@@ -11,6 +11,7 @@ public class Monster extends Elements implements IPawn
 	private int startX;
 	private int startY;
 	private map map;
+	private boolean aliveMonster = true;
 
 	public Monster(String nameFile, map Map) 
 	{
@@ -33,6 +34,13 @@ public class Monster extends Elements implements IPawn
 		}
 		this.startX = valuesX;
 		this.startY = valuesY;
+	}
+	
+	public final void resetMonster()
+	{
+		this.RandomStartPosition();
+		this.setPosition(getStartX(), getStartY());
+		this.aliveMonster = true;
 	}
 	
 	public final void RamdomMovingMonster()
@@ -224,5 +232,17 @@ public class Monster extends Elements implements IPawn
 	{
 		return startY;
 	}
+
+	public boolean isAliveMonster() 
+	{
+		return aliveMonster;
+	}
+
+	public void setAliveMonster(boolean aliveMonster) 
+	{
+		this.aliveMonster = aliveMonster;
+	}
+
+
 	
 }

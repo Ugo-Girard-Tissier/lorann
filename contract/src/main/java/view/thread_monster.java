@@ -22,11 +22,26 @@ public class thread_monster extends Thread
 		  
 		while (controller.getView().getStop() == 0) 
 		{
-			controller.getModel().getMap().getMonster1().monstersTrackingLorann();
-			controller.getModel().getMap().getMonster2().RamdomMovingMonster();
-			controller.getModel().getMap().getMonster3().RamdomMovingMonster();
-			controller.getModel().getMap().getMonster4().monsterTrackingLorannSmarter();
-			controller.getView().monsterReachingLorann();
+			if (controller.getModel().getMap().getMonster1().isAliveMonster() == true)
+			{
+				controller.getModel().getMap().getMonster1().monstersTrackingLorann();
+				controller.getView().monsterReachingLorann();
+			}
+			if (controller.getModel().getMap().getMonster2().isAliveMonster() == true)
+			{
+				controller.getModel().getMap().getMonster2().RamdomMovingMonster();
+				controller.getView().monsterReachingLorann();
+			}
+			if (controller.getModel().getMap().getMonster3().isAliveMonster() == true)
+			{
+				controller.getModel().getMap().getMonster3().RamdomMovingMonster();
+				controller.getView().monsterReachingLorann();
+			}
+			if (controller.getModel().getMap().getMonster4().isAliveMonster() == true)
+			{
+				controller.getModel().getMap().getMonster4().monsterTrackingLorannSmarter();
+				controller.getView().monsterReachingLorann();
+			}
 			controller.getView().updateMap(); 
 			try 
 			{

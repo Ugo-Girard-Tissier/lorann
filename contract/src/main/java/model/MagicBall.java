@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import controller.IController;
 import showboard.IPawn;
 
 public class MagicBall extends Elements implements IPawn
@@ -46,6 +47,33 @@ public class MagicBall extends Elements implements IPawn
 			case 3:
 				this.backwardMouvementMagicBall();
 				break;
+		}
+	}
+	
+	public void magicBallReachMonster(IController controller)
+	{
+		if (this.getX() == this.map.getMonster1().getX() && this.getY() == this.map.getMonster1().getY())
+		{
+			controller.getView().removeMagicBall(controller);
+			controller.getView().removeMonster(1);
+		}
+			
+		if (this.getX() == this.map.getMonster2().getX() && this.getY() == this.map.getMonster2().getY())
+		{
+			controller.getView().removeMagicBall(controller);
+			controller.getView().removeMonster(2);
+		}
+			
+		if (this.getX() == this.map.getMonster3().getX() && this.getY() == this.map.getMonster3().getY())
+		{
+			controller.getView().removeMagicBall(controller);
+			controller.getView().removeMonster(3);
+		}
+			
+		if (this.getX() == this.map.getMonster4().getX() && this.getY() == this.map.getMonster4().getY())
+		{
+			controller.getView().removeMagicBall(controller);
+			controller.getView().removeMonster(4);
 		}
 	}
 	

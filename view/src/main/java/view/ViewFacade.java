@@ -7,6 +7,7 @@ import java.util.Observable;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import controller.IController;
 import showboard.BoardFrame;
 import model.*;
 
@@ -193,8 +194,41 @@ public class ViewFacade extends Observable implements IView, Runnable
 		return addMagicBallState;	
 	}
 	
-	public void removeMagicBall()
+	public void removeMagicBall(IController controller)
 	{
+		this.model.getMap().getMagicBall().setPosition(20, 20);
+		controller.setAnimationMagicBallStatement(0);
+	}
+	
+	public void removeMonster(int monster)
+	{
+		switch(monster)
+		{
+			case 1:
+			{
+				this.model.getMap().getMonster1().setPosition(20, 20);
+				this.model.getMap().getMonster1().setAliveMonster(false);
+				break;
+			}
+			case 2:
+			{
+				this.model.getMap().getMonster2().setPosition(20, 20);
+				this.model.getMap().getMonster2().setAliveMonster(false);
+				break;
+			}
+			case 3:
+			{
+				this.model.getMap().getMonster3().setPosition(20, 20);
+				this.model.getMap().getMonster3().setAliveMonster(false);
+				break;
+			}
+			case 4:
+			{
+				this.model.getMap().getMonster4().setPosition(20, 20);
+				this.model.getMap().getMonster4().setAliveMonster(false);
+				break;
+			}
+		}
 	}
 	
 	public void OpenGate(int x, int y)
@@ -238,6 +272,10 @@ public class ViewFacade extends Observable implements IView, Runnable
                 this.model.connection();
                 this.model.getMap().readmapBDD();
                 this.model.getMap().calculatedNumberOfCrystallBall();
+                this.model.getMap().getMonster1().resetMonster();
+                this.model.getMap().getMonster2().resetMonster();
+                this.model.getMap().getMonster3().resetMonster();
+                this.model.getMap().getMonster4().resetMonster();
                 this.frameConfigure(boardFrame);
             }
             else

@@ -1,5 +1,6 @@
 package view;
 
+import controller.IController;
 import showboard.BoardFrame;
 
 /**
@@ -13,7 +14,8 @@ public interface IView
 	public void run();
 	public void updateMap();
 	public int addMagicBall();
-	public void removeMagicBall();
+	public void removeMagicBall(IController controller);
+	public void removeMonster(int monster);
 	public void updateMapElements(String Elements,int x,int y);
 	public void OpenGate(int x, int y);
 	public void getPurse(int x, int y);
