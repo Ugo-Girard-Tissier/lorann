@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -13,7 +12,6 @@ public class HomePanel extends JPanel {
 private static final long serialVersionUID = 1L;
 	
 	private ActionButton button_choice_1_home;
-	private ActionButton button_choice_2_home;
 	
 	Image img_home;
 	
@@ -27,10 +25,7 @@ private static final long serialVersionUID = 1L;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		};
-		
-		
-		
+		};	
 	}
 	
 	
@@ -53,18 +48,6 @@ private static final long serialVersionUID = 1L;
 
 	public void setButton_choice_1_home(ActionButton button_choice_1_home) {
 		this.button_choice_1_home = button_choice_1_home;
-	}
-
-
-
-	public ActionButton getButton_choice_2_home() {
-		return button_choice_2_home;
-	}
-
-
-
-	public void setButton_choice_2_home(ActionButton button_choice_2_home) {
-		this.button_choice_2_home = button_choice_2_home;
 	}
 
 }

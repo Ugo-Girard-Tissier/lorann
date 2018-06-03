@@ -19,6 +19,10 @@ public class HomeFrame extends JFrame  {
 	    this.PanEdit = new HomePanel ();
 	    this.setContentPane(this.PanEdit);
 	    
+		this.addKeyListener(this.PanEdit.getButton_choice_1_home());
+		this.requestFocus();
+	    
+	    
 	    this.setVisible(true);
 		
 		

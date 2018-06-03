@@ -25,7 +25,7 @@ public final class ModelFacade implements IModel
         super();
         this.DAO = new LorannDAO();
         this.DAO.open();
-        this.Map = new map(this.DAO.getMAp(3));
+        this.Map = new map(this.DAO.getMAp(map_choice));
         this.DAO.close();
     }
 	
