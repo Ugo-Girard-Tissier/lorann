@@ -18,25 +18,41 @@ import model.*;
  *
  * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
  * @version 1.0
+ * @see run
+ * @see runBoardHome
+ * @see frameConfigure
+ * @see updateMap
+ * @see addMagicBall
+ * @see removeMagicBall
+ * @see removeMonster
+ * @see OpenGate
+ * @see getPurse
+ * @see reachingOpenGate
+ * @see reachingThreat
+ * @see monsterReachingLorann
+ * @see updateMapElements
  */
+
 public class ViewFacade extends Observable implements IView, Runnable
 {
-	
+	/** Width of the game frame */
 	private static final int sizeFrameWidth = 1280;
-	
+	/** Height of the game frame */
 	private static final int sizeFrameHeight = 768;
-	
+	/** create with the showboard library the game frame */
 	private static final Rectangle lorannGame = new Rectangle(0 ,0 ,map.getWidth(),map.getHeight());
 	
 	private IModel model;
-	
+	/** game frame */
 	private BoardFrame boardFrame;
+	/** home frame */
 	private HomeFrame Home;
-	
+	/** int use to displays or not the game frame */
 	private int stop = 0;
     
 	/**
      * Instantiates a new view facade.
+     * Load every sprite of each elements of the game
      */
     public ViewFacade(IModel model) throws IOException
     {
@@ -57,6 +73,7 @@ public class ViewFacade extends Observable implements IView, Runnable
         this.model.getMap().getCrystallBall().loadImage();
         this.model.getMap().getOpenGate().loadImage();
     }
+    /** Sets the different parameters of the Frame */
     public void run() 
     {
         this.boardFrame = new BoardFrame("LORANN GAME");
@@ -64,17 +81,20 @@ public class ViewFacade extends Observable implements IView, Runnable
         boardFrame.setDisplayFrame(lorannGame);
         boardFrame.setSize(sizeFrameWidth, sizeFrameHeight);
         boardFrame.setLocationRelativeTo(null);
-        //Frame Configure
+        //Configure the frame
         this.frameConfigure(boardFrame);
     }
     
-    
+    /** display the home page */
     public void runBoardHome () 
     {
     	this.setHome(new HomeFrame());
-   }
+    }
        
-  
+    /** configure the frame (adding every element of the game on a IBoard through the showboard library)
+     * Static element -> ISquare
+     * Mobile element -> IPawn
+     * */
     public final void frameConfigure(final BoardFrame frame) 
     {
 		
@@ -116,13 +136,17 @@ public class ViewFacade extends Observable implements IView, Runnable
     	this.addObserver(frame.getObserver());
         frame.setVisible(true);
     }
-        
+    
+    /** The view notify to the showboard library that she changed  */
 	public void updateMap()
 	{
 		this.setChanged();
         this.notifyObservers();
 	}
 	
+	/** this method add a magic ball in front of the Lorann (depends of the direction of the Lorann) 
+	 * In this method, we check if there is no obstacles in front of the Lorann because a magic ball can't spawn on a obstacle
+	 * */
 	public int addMagicBall()
 	{
 		int xMagicBall = this.model.getMap().getLorann().getX();//BHVCGPO
@@ -194,12 +218,14 @@ public class ViewFacade extends Observable implements IView, Runnable
 		return addMagicBallState;	
 	}
 	
+	/** this method "remove" (re-definition of his position) a magic ball from the game */
 	public void removeMagicBall(IController controller)
 	{
 		this.model.getMap().getMagicBall().setPosition(20, 20);
 		controller.setAnimationMagicBallStatement(0);
 	}
 	
+	/** this method "remove" (re-definition of his position) a monster from the game */
 	public void removeMonster(int monster)
 	{
 		switch(monster)
@@ -231,6 +257,9 @@ public class ViewFacade extends Observable implements IView, Runnable
 		}
 	}
 	
+	/** this method check if the lorann is on a crystal ball and check if the Lorann has obtained every crystal ball 
+	 * if so, the door will be opened
+	  **/
 	public void OpenGate(int x, int y)
 	{
 		int numberOfCrystallBall = this.model.getMap().getNumberOfCrystallBall();
@@ -246,7 +275,9 @@ public class ViewFacade extends Observable implements IView, Runnable
 			}
 		}
 	}
-	
+	/** this method check if the Lorann is on a purse 
+	 * if so, the player score is increased
+	 **/
 	public void getPurse(int x, int y)
 	{
 		if (this.model.getMap().mapRead[x][y] == 'P')
@@ -258,7 +289,11 @@ public class ViewFacade extends Observable implements IView, Runnable
 			this.model.getMap().setScoreLorann(scoreLorann);
 		}
 	}
-	
+	/** Win condition : this method check if the Lorann is on a open gate 
+	 * if so, the player has win and a victory window appear (with a victory message and the score of the Lorann)
+	 * Every elements of the game is reset (position of mobile elements, reading the map on the data base and so on)
+	 * The player has access to the next map
+	 **/
 	public void reachingOpenGate(int x,int y)
 	{
 		ImageIcon winIcon = new ImageIcon("annex/reward.png");
@@ -266,7 +301,7 @@ public class ViewFacade extends Observable implements IView, Runnable
 		{
 			getBoardFrame().dispose();
 			JOptionPane.showMessageDialog(null, "You Win !!!\nYour score : " + this.model.getMap().getScoreLorann(),"Congratulation !!!", JOptionPane.INFORMATION_MESSAGE, winIcon);
-			if (this.model.getMap_choice() <= 4)
+			if (this.model.getMap_choice() <= 12)
             {
                 this.model.setMap_choice(this.model.getMap_choice() + 1);
                 this.model.connection();
@@ -283,6 +318,10 @@ public class ViewFacade extends Observable implements IView, Runnable
 		}
 	}
 	
+	/** Lose condition : this method check if the Lorann reach a monster
+	 * if so, the player has lose and a lose window appear (with a lose message and the score of the Lorann)
+	 *	the game (the program) end here
+	 **/
 	public void reachingThreat(int x, int y)
 	{
 		ImageIcon loseIcon = new ImageIcon("annex/game_over.png");
@@ -301,6 +340,10 @@ public class ViewFacade extends Observable implements IView, Runnable
 		}
 	}
 	
+	/** Lose condition : this method check if a monster reach Lorann
+	 * if so, the player has lose and a lose window appear (with a lose message and the score of the Lorann)
+	 *	the game (the program) end here
+	 **/
 	public void monsterReachingLorann()
 	{
 		ImageIcon loseIcon = new ImageIcon("annex/game_over.png");
@@ -318,7 +361,10 @@ public class ViewFacade extends Observable implements IView, Runnable
 			
 		}
 	}
-	
+	/** this method update 2 kind of elements
+	 * the door : if every crystal ball has been collect, the close door will be update to a open gate
+	 * the purse : if a purse is collect, the purse will disappear from the game
+	 **/
 	public void updateMapElements(String Elements,int x,int y)
 	{
 		switch(Elements)
@@ -345,23 +391,29 @@ public class ViewFacade extends Observable implements IView, Runnable
 	}
 	
 	
-    public BoardFrame getBoardFrame() {
+    public BoardFrame getBoardFrame() 
+    {
 		return boardFrame;
 	}
-	public void setBoardFrame(BoardFrame boardFrame) {
+	public void setBoardFrame(BoardFrame boardFrame) 
+	{
 		this.boardFrame = boardFrame;
 	}
 	
-	public int getStop() {
+	public int getStop() 
+	{
 		return stop;
 	}
-	public void setStop(int stop) {
+	public void setStop(int stop) 
+	{
 		this.stop = stop;
 	}
-	public HomeFrame getHome() {
+	public HomeFrame getHome() 
+	{
 		return Home;
 	}
-	public void setHome(HomeFrame home) {
+	public void setHome(HomeFrame home) 
+	{
 		Home = home;
 	}
 	

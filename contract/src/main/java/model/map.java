@@ -5,50 +5,76 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * <h1> The class map. </h1>
+ * <p>
+ * This class is used to instantiate a map, this is an arrayList which contain every elements of the map
+ * </p>
+ * <p>
+ * The map class is a public class with 23 attributes (private and public) and 5 methods (private and public)
+ * </p>
+ * <p>
+ * The map class contain the position of every elements on a arraylist (bone, vertical bone, and so on)
+ * </p>
+ * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
+ * @version 1.0
+ * @see readMap
+ * @see readmapBDD
+ * @see calculatedNumberOfCrystallBall
+ * @see updateElementsOnMap
+ * @see updateGateOnMap
+ */
+
 public class map 
 {
-	//Sprites
+	/** create and set the sprite for the bone */
 	private final Elements Bone = new Elements("/bone.png");
-		
+	/** create and set the sprite for the horizontal bone */
 	private final Elements H_Bone = new Elements("/horizontal_bone.png");
-		
+	/** create and set the sprite for the vertical bone */	
 	private final Elements V_Bone = new Elements("/vertical_bone.png");
-
+	/** create and set the sprite for the void */
 	private final Elements Nothing = new Elements("/void.png");
-		
+	/** create and set the sprite for the gate closed */
 	private Elements closeGate = new Elements("/gate_closed.png");
-	
+	/** create and set the sprite for the purse */
 	private Elements purse = new Elements("/purse.png");
-	
+	/** create and set the sprite for the crystal ball */
 	private Elements crystallBall = new Elements("/crystal_ball.png");
-	
+	/** create and set the sprite for the element */
 	private Elements OpenGate = new Elements("/gate_open.png");
 	
+	/** Object Lorann */
 	private Lorann lorann;
-	
+	/** Object magicBall */
 	private MagicBall magicBall;
-	
+	/** Object monster number 1 */
 	private Monster Monster1;
-	
+	/** Object monster number 2 */
 	private Monster Monster2;
-	
+	/** Object monster number 3 */
 	private Monster Monster3;
-	
+	/** cObject monster number 4 */
 	private Monster Monster4;
 	
 	//Reading the file
 	File f = new File("annex/MAP5.txt");
     FileReader fileReader;
     public char choice;
+    //Map (Array List of char) and size of the map (number of sprite which the map can contain)
     public char mapRead[][] = new char[width][height];
     private final static int height = 12;
 	private final static int width = 20;
 	
-	//characteristic of the map
+	//characteristic of the map (crystal ball and score obtain through purse)
 	private int numberOfCrystallBall = 0;
 	private int scoreLorann = 0;
 	private String map;
 	
+	/** This constructor is used to create and set the sprite of every Mobile element (elements which can move)
+	 * Read the map (large String) which is contain on a data base
+	 * Calculate the number of crystal ball for the win condition
+	 **/
 	public map(String map_p) throws IOException
     {
         this.map = map_p;
@@ -62,6 +88,7 @@ public class map
         this.calculatedNumberOfCrystallBall();
     }
     
+	/** Read the map through a file */
 	@SuppressWarnings("unused")
 	private void readMap()
 	{
@@ -73,7 +100,7 @@ public class map
 	    {
 	        System.out.println("File not found");
 	    }
-	    //Lecture
+	    //Reading
 	    try
 	    {
 	        int c = 0;
@@ -122,6 +149,7 @@ public class map
 	    }
 	}
 	
+	/** Read the map trough the data base */
 	public void readmapBDD () {
 
         char choice;
@@ -167,6 +195,7 @@ public class map
             }
     }
 	
+	/** Check every elements of the map and calculate the number of crystal ball */
 	public void calculatedNumberOfCrystallBall()
 	{
 		for (int y = 0; y < height ; y++) 
@@ -181,11 +210,13 @@ public class map
         }
 	}
 	
+	/** Update Elements on the map (arraylist), transform it into "void" */
 	public void updateElementsOnMap(int x,int y)
 	{
 		this.mapRead[x][y] = 'N';
 	}
 	
+	/** Update the elements closeGate on the map (arraylist), transform it into "openGate" */
 	public void updateGateOnMap(int x,int y)
 	{
 		this.mapRead[x][y] = 'O';

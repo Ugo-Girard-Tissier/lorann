@@ -15,6 +15,9 @@ import view.IView;
  *
  * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
  * @version 1.0
+ * @see start
+ * @see keyPressed
+ * @see spotEvent
  */
 public class ControllerFacade implements IController, KeyListener
 {
@@ -23,13 +26,13 @@ public class ControllerFacade implements IController, KeyListener
     private final IView  view;
     /** The model. */
     private final IModel model;
-    
+    /** thread lorann */
     thread_lorann thread_lorann;
-    
+    /** thread monster */
     thread_monster thread_monster;
-    
+    /** thread magic ball */
     thread_magicball thread_magicball;
-    
+    /** int use to check if there is magic ball or not */
     private int animationMagicBallStatement = 0;
     
     /**
@@ -50,7 +53,7 @@ public class ControllerFacade implements IController, KeyListener
     }
 
     /**
-     * Start.
+     * Start the game.
      *
      * @throws SQLException
      *             the SQL exception
@@ -77,17 +80,11 @@ public class ControllerFacade implements IController, KeyListener
         this.getView().getBoardFrame().requestFocus();
     }
 
-    /**
-     * Gets the view.
-     *
-     * @return the view
-     */
-
 	@Override
 	public void keyTyped(KeyEvent e) 
 	{	
 	}
-
+	/** method use to catch keyboard event (when the user use a key) */
 	@Override
 	public void keyPressed(KeyEvent e) 
 	{
@@ -146,7 +143,7 @@ public class ControllerFacade implements IController, KeyListener
 				break;
 			}
 	}
-	
+	/** This method use to check every different events which can appear after a Lorann movements */
 	public void spotEvent()
 	{
 		int LorannX = this.getModel().getMap().getLorann().getX();

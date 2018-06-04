@@ -10,16 +10,50 @@ import javax.imageio.ImageIO;
 
 import showboard.IPawn;
 
+/**
+ * <h1> The class Lorann. </h1>
+ * <p>
+ * This class is used to instantiate Lorann object. A Lorann can move and use a magic ball through his methods define here
+ * </p>
+ * <p>
+ * The Lorann class is a public class with 7 private attributes and 19 public methods
+ * </p>
+ * <p>
+ * The Lorann class extends Elements for his sprite and implements IPawn because he need to move on a IBoard
+ * </p>
+ * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
+ * @version 1.0
+ * @see RandomStartPosition
+ * @see animationLorann
+ * @see rightMouvementLorann
+ * @see leftMouvementLorann
+ * @see forwardMouvementLorann
+ * @see backwardMouvementLorann
+ * @see diagonalRightForwardMouvementLorann
+ * @see diagonalLeftForwardMouvementLorann
+ * @see diagonalRightBackwardMouvementLorann
+ * @see diagonalLeftBackwardMouvementLorann
+ *
+ */
+
 public class Lorann extends Elements implements IPawn
 {
+	/** Private attribute which define the position of the Lorann (x,y), this attribute is used by the showboard library*/
 	private Point Positon;
+	/** Initial x position of the Lorann */
 	private int startX;
+	/** Initial y position of the Lorann */
 	private int startY;
+	/** Map attribute used by the Lorann for his movement (he need to know where he can move) */
 	private map map;
+	/** Direction of the Lorann (0 for right,1 for left, and so on) */
 	private int direction;
+	/** Every sprite of the Lorann (some of the sprite are used for the movement and others are use for the Lorann animation) */
 	private Image imageLorann[];
+	/**Int used to select the right sprite */
 	private int numberImage = 0;
-
+	
+	/** This constructor is used to set the start position of the Lorann (random position) and set all of his sprite on a arraylist*/
 	public Lorann(String nameFile, map Map) throws IOException 
 	{
 		super(nameFile);
@@ -36,7 +70,7 @@ public class Lorann extends Elements implements IPawn
 		
 	}
 
-	
+	/** Generate random x and y position (start position of the Lorann) */
 	public final void RandomStartPosition()
 	{
 	int valuesX = 0;
@@ -52,6 +86,7 @@ public class Lorann extends Elements implements IPawn
 	this.startY = valuesY;
 	}
 	
+	/** Animation of the Lorann, show sprite one by one through the Lorann thread*/
 	public final void animationLorann()
 	{
 		if (numberImage == 8)
@@ -62,6 +97,7 @@ public class Lorann extends Elements implements IPawn
 		numberImage++;
 	}
 	
+	/** Right movement of the Lorann, set the direction and add 1 to the x position */
 	public final void rightMouvementLorann()
 	{
 		this.direction = 0;
@@ -74,6 +110,8 @@ public class Lorann extends Elements implements IPawn
 			this.setImage(imageLorann[2]);
 		}
 	}
+	
+	/** Left movement of the Lorann, set the direction and subtract 1 to the x position */
 	public final void leftMouvementLorann()
 	{
 		this.direction = 1;
@@ -86,6 +124,8 @@ public class Lorann extends Elements implements IPawn
 			this.setImage(imageLorann[6]);
 		}
 	}
+	
+	/** Forward movement of the Lorann, set the direction and subtract 1 to the y position */
 	public final void forwardMouvementLorann()
 	{
 		this.direction = 2;
@@ -98,6 +138,8 @@ public class Lorann extends Elements implements IPawn
 			this.setImage(imageLorann[0]);
 		}
 	}
+	
+	/** Backward movement of the Lorann, set the direction and add 1 to the y position */
 	public final void backwardMouvementLorann()
 	{
 		this.direction = 3;
@@ -110,6 +152,8 @@ public class Lorann extends Elements implements IPawn
 			this.setImage(imageLorann[4]);
 		}
 	}
+	
+	/** DiagonalRightForward movement of the Lorann, add 1 to the x and subtract 1 to the y position */
 	public final void diagonalRightForwardMouvementLorann()
 	{
 		int NewX = this.getX();
@@ -122,6 +166,8 @@ public class Lorann extends Elements implements IPawn
 			this.setImage(imageLorann[1]);
 		}
 	}
+	
+	/** DiagonalLeftForward movement of the Lorann, subtract 1 to the x and subtract 1 to the y position */
 	public final void diagonalLeftForwardMouvementLorann()
 	{
 		int NewX = this.getX();
@@ -134,6 +180,8 @@ public class Lorann extends Elements implements IPawn
 			this.setImage(imageLorann[7]);
 		}
 	}
+	
+	/** DiagonalRightBackward movement of the Lorann, add 1 to the x and add 1 to the y position */
 	public final void diagonalRightBackwardMouvementLorann()
 	{
 		int NewX = this.getX();
@@ -146,6 +194,8 @@ public class Lorann extends Elements implements IPawn
 			this.setImage(imageLorann[3]);
 		}
 	}
+	
+	/** DiagonalleftForward movement of the Lorann, subtract 1 to the x and add 1 to the y position */
 	public final void diagonalLeftBackwardMouvementLorann()
 	{
 		int NewX = this.getX();
@@ -159,8 +209,6 @@ public class Lorann extends Elements implements IPawn
 		}
 	}
 	
-	
-
 	@Override
 	public int getX() 
 	{
@@ -179,7 +227,6 @@ public class Lorann extends Elements implements IPawn
 		return this.Positon;
 	}
 
-	
 	public final void setPosition(Point position)
 	{
 		this.Positon = position;

@@ -2,19 +2,40 @@ package model;
 
 import java.sql.*;
 
-public class LorannDAO {
-
+/**
+ * <h1> the class Lorann DAO </h1>
+ * <p>
+ * This class allow the connection between java and a data base
+ * </p>
+ * <p>
+ * The LorannDAO class is a public class with 3 private attributes and 2 public attributes and 5 methods
+ * </p>
+ * @author Sulyven, Enzo, Abdel, Arthur and Ugo group
+ * @version 1.0
+ * @see getMAPQuery
+ * @see open
+ * @see close
+ * @see getMAp
+ * @see executeQuery
+ */
+public class LorannDAO 
+{
+	/** URL of the data base (local data base) */
     private static  String URL = "jdbc:mysql://localhost/lorann? autoReconnect=true&useSSL=false&useUnicode=true&useJDBC"
                 + "CompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    /** user with who the connection will be done (root has all the privileges)*/
     private static String LOGIN = "root";
+    /** password the user (root - no password)*/
     private static String PASSWORD = "";
-
+    /** Connection represent a connection */
     public Connection connection;
+    /** Statement represent the connection flow */
     public Statement statement;
 
 
-
-    public static String getMAPQuery(int id) {
+    /** Launch a call query (call the stored procedures) */
+    public static String getMAPQuery(int id) 
+    {
          return "call CALL_MAP(" + id + ");";
     }
 
@@ -25,7 +46,8 @@ public class LorannDAO {
     this.statement = null; 
 
     }
-
+    
+    /** Open a connection between java and the data base */
     public boolean open () {
 
         System.out.println("opening a connection");
@@ -46,7 +68,7 @@ public class LorannDAO {
         return true;
     }
 
-
+    /** Close a connection between java and the data base */
     public void close () {
 
         System.out.println("closing a connection");
@@ -61,7 +83,9 @@ public class LorannDAO {
         }
     }
 
-
+    /** Get the map as a String 
+     * @return map
+     **/
     public String getMAp (int id) throws SQLException {
 
     final ResultSet resultSet = this.executeQuery(getMAPQuery(id));
@@ -75,7 +99,11 @@ public class LorannDAO {
      return map;
 
     }
-
+    
+    /** execute the call query (call the stored procedures) 
+     * return the result of the call query
+     * @return retur
+     **/
     private ResultSet executeQuery (String query_p) throws SQLException{
 
         ResultSet retur = this.statement.executeQuery(query_p);

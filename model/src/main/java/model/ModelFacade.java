@@ -35,7 +35,6 @@ public final class ModelFacade implements IModel
         try {
             this.Map.setMap(this.DAO.getMAp(map_choice));
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         this.DAO.close();
