@@ -41,9 +41,9 @@ public class Lorann extends Elements implements IPawn
 	/** Private attribute which define the position of the Lorann (x,y), this attribute is used by the showboard library*/
 	private Point Positon;
 	/** Initial x position of the Lorann */
-	private int startX;
+	private int startX = 1;
 	/** Initial y position of the Lorann */
-	private int startY;
+	private int startY = 1;
 	/** Map attribute used by the Lorann for his movement (he need to know where he can move) */
 	private map map;
 	/** Direction of the Lorann (0 for right,1 for left, and so on) */
@@ -58,7 +58,7 @@ public class Lorann extends Elements implements IPawn
 	{
 		super(nameFile);
 		this.map = Map;
-		this.RandomStartPosition();
+		//this.RandomStartPosition();
 		this.setPosition(getStartX(), getStartY());
 		this.imageLorann = new Image[8];
 		int y = 0;

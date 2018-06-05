@@ -311,6 +311,7 @@ public class ViewFacade extends Observable implements IView, Runnable
                 this.model.getMap().getMonster2().resetMonster();
                 this.model.getMap().getMonster3().resetMonster();
                 this.model.getMap().getMonster4().resetMonster();
+                this.model.getMap().getLorann().setPosition(this.model.getMap().getLorann().getStartX(), this.model.getMap().getLorann().getStartY());
                 this.frameConfigure(boardFrame);
             }
             else

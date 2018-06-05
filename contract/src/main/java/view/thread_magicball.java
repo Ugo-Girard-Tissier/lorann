@@ -23,7 +23,7 @@ public class thread_magicball extends Thread
 	IController controller;
 	
 	
-	private final int loop = 100;
+	private final int loop = 10;
 	
 	/** this constructor define a thread (his name) */
 	public thread_magicball  (String name, IController controller_p){

@@ -21,7 +21,7 @@ public class thread_monster extends Thread
 	IController controller;
 	
 	
-	private final int loop = 200;
+	private final int loop = 400 ;
 	
 	/** this constructor define a thread (his name) */
 	public thread_monster (String name, IController controller_p)
